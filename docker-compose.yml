@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  api:
+    image: labioquim/mold2
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: ["yarn", "start:dev"]
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - redis:/data
+
+volumes:
+  redis:
+    driver: nfsvol
