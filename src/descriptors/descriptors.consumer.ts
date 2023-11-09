@@ -100,7 +100,8 @@ export class DescriptorsConsumer {
           12.668 * (B ^ 3) * C -
           144.091 * (B ^ 2) * (C ^ 2) -
           206.85 * B * (C ^ 3) -
-          62.484 * (C ^ 4);
+          62.484 * (C ^ 4) -
+          743.63518669;
       }
 
       descriptorsResult.push(
