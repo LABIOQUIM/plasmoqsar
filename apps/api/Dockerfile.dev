@@ -1,5 +1,8 @@
 FROM node:20-bookworm-slim AS base
 
+RUN apt update
+RUN apt install -y procps
+
 # Install dependencies only when needed
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
@@ -7,13 +10,13 @@ FROM base AS deps
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY package.json yarn.lock ./
-RUN yarn --frozen-lockfile
+COPY apps/api/package.json yarn.lock ./
+RUN yarn install
 
 # Rebuild the source code only when needed
 FROM base AS builder
 
-COPY bin/Mold2 /bin/Mold2
+COPY apps/api/bin/Mold2 /bin/Mold2
 
 RUN chmod +x /bin/Mold2
 

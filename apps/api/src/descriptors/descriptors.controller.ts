@@ -4,8 +4,6 @@ import {
   Get,
   Param,
   Post,
-  Req,
-  Res,
   StreamableFile,
   UploadedFile,
   UseInterceptors,
@@ -24,13 +22,16 @@ export class DescriptorsController {
   async calculateDescriptors(
     @Body() body: DescriptorsDto,
     @UploadedFile() file: Express.Multer.File,
-  ) {
+  ): Promise<void> {
     this.descriptorsService.addToQueue(file, body.username);
   }
 
   @Get('/:username')
-  async getDescriptors(@Param('username') username: string) {
-    const file = await this.descriptorsService.retrieveDescriptors(username);
+  async getDescriptors(
+    @Param('username') username: string,
+  ): Promise<StreamableFile> {
+    const file: Buffer =
+      await this.descriptorsService.retrieveDescriptors(username);
 
     return new StreamableFile(file);
   }

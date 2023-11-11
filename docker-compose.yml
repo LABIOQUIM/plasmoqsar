@@ -2,23 +2,42 @@ version: "3"
 
 services:
   api:
-    image: labioquim/mold2
+    image: labioquim/qsar-api
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: apps/api/Dockerfile.dev
     command: ["yarn", "start:dev"]
+    restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3001:3000"
     volumes:
-      - .:/app
+      - ./apps/api:/app
+      - files:/files
       - /app/node_modules
+
+  ui:
+    build:
+      context: .
+      dockerfile: apps/ui/Dockerfile.dev
+    image: labioquim/qsar-ui
+    command: ["yarn", "dev"]
+    ports:
+      - "3002:3000"
+    depends_on:
+      - api
+    volumes:
+      - ./apps/ui:/app
+      - /app/node_modules
+      - /app/.next
 
   redis:
     image: redis:alpine
-    restart: always
+    restart: unless-stopped
     volumes:
       - redis:/data
 
 volumes:
+  files:
+    driver: nfsvol
   redis:
     driver: nfsvol

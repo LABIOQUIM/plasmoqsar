@@ -7,17 +7,17 @@ import * as fs from 'fs';
 export class DescriptorsService {
   constructor(@InjectQueue('descriptors') private descriptorsQueue: Queue) {}
 
-  async addToQueue(file: Express.Multer.File, username: string) {
+  async addToQueue(file: Express.Multer.File, username: string): Promise<void> {
     await this.descriptorsQueue.add('calculate-descriptors', {
       username: username,
       filename: file.filename,
     });
   }
 
-  async retrieveDescriptors(username: string) {
-    const filepath = `/app/Files/${username}/out.txt`;
-    const file = await new Promise<Buffer>((resolve, reject) => {
-      fs.readFile(filepath, {}, (err, data) => {
+  async retrieveDescriptors(username: string): Promise<Buffer> {
+    const filepath: string = `/files/${username}/out.txt`;
+    const file: Buffer = await new Promise<Buffer>((resolve, reject): void => {
+      fs.readFile(filepath, {}, (err: NodeJS.ErrnoException, data: Buffer) => {
         if (err) {
           reject(err);
         } else {

@@ -4,13 +4,13 @@ import * as fs from 'fs';
 
 const multerConfig = {
   storage: diskStorage({
-    destination: './Files',
+    destination: '/files',
     filename: (req, file, cb) => {
       const fileName = path.parse(file.originalname).name.replace(/\s/g, '');
 
       const extension = path.parse(file.originalname).ext;
 
-      const userDir = `./Files/${req.headers['x-username']}`;
+      const userDir = `/files/${req.headers['x-username']}`;
 
       if (fs.existsSync(userDir)) {
         fs.rmSync(userDir, { recursive: true, force: true });
