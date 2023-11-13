@@ -1,7 +1,7 @@
-FROM node:20-bookworm-slim AS base
+FROM node:20-buster-slim AS base
 
-RUN apt update
-RUN apt install -y procps
+# RUN apk add --no-cache procps
+RUN apt update && apt install procps openssl -y
 
 # Install dependencies only when needed
 FROM base AS deps

@@ -1,7 +1,9 @@
 # compiled output
 /dist
 /node_modules
-../../report.txt
+report.txt
+.env
+
 # Logs
 logs
 *.log

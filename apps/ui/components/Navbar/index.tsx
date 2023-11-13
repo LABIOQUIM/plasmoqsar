@@ -12,8 +12,9 @@ import {
 import { Icon, IconBulb, IconSearch } from "@tabler/icons-react";
 import Link from "next/link";
 
-import classes from "./Navbar.module.css";
 import { SignInButton } from "@/components/SignInButton";
+
+import classes from "./Navbar.module.css";
 
 interface MainLink {
   icon: Icon;
@@ -80,10 +81,10 @@ export function Navbar({ toggle }: Props): ReactElement {
 
   return (
     <>
-        <div className={classes.section}>
-          {/* Signed out users get sign in button */}
-          <SignInButton />
-        </div>
+      <div className={classes.section}>
+        {/* Signed out users get sign in button */}
+        <SignInButton />
+      </div>
 
       <TextInput
         placeholder="Search"

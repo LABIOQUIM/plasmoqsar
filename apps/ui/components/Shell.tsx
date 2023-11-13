@@ -20,10 +20,7 @@ const Navbar = dynamic(
 );
 
 const ThemeToggle = dynamic(
-  () =>
-    import("@/components/ThemeToggle").then(
-      (mod) => mod.ThemeToggle
-    ),
+  () => import("@/components/ThemeToggle").then((mod) => mod.ThemeToggle),
   {
     ssr: false,
   }

@@ -1,3 +1,6 @@
 {
-  "extends": ["@ivopr/eslint-config/node"]
+  "extends": ["@ivopr/eslint-config/node"],
+  "rules": {
+    "no-useless-constructor": "off"
+  }
 }

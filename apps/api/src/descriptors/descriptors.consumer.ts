@@ -1,9 +1,9 @@
-import { OnQueueActive, OnQueueFailed, Process, Processor } from '@nestjs/bull';
-import { Job } from 'bull';
-import * as fs from 'fs';
-import { execSync } from 'child_process';
+import { OnQueueActive, OnQueueFailed, Process, Processor } from "@nestjs/bull";
+import { Job } from "bull";
+import { execSync } from "child_process";
+import * as fs from "fs";
 
-@Processor('descriptors')
+@Processor("descriptors")
 export class DescriptorsConsumer {
   @OnQueueActive()
   onActive(job: Job): void {
@@ -15,10 +15,10 @@ export class DescriptorsConsumer {
     console.log(`Error in job: ${job.id}. Error: ${error.message}`);
   }
 
-  @Process('calculate-descriptors')
+  @Process("calculate-descriptors")
   async calculateDescriptors({ data }: Job): Promise<void> {
-    const userDirPath = data.filename.split('/')[0];
-    const filename = data.filename.split('/')[1];
+    const userDirPath = data.filename.split("/")[0];
+    const filename = data.filename.split("/")[1];
 
     const command: string = `Mold2 -i /files/${userDirPath}/${filename} -o /files/${userDirPath}/out.txt`;
 
@@ -30,7 +30,7 @@ export class DescriptorsConsumer {
 
     const isolatedDescriptorsRaw: string = fs.readFileSync(
       `/files/${userDirPath}/isolatedDescriptors.txt`,
-      'utf-8',
+      "utf-8"
     );
 
     const isolatedDescriptorsContent: string[] =
@@ -48,14 +48,14 @@ export class DescriptorsConsumer {
       }
 
       const line: string = isolatedDescriptorsContent[i];
-      const lineArr: string[] = line.split('\t');
+      const lineArr: string[] = line.split("\t");
       const Nmbr: string = lineArr[0];
       const AutoId: string = lineArr[1];
       const valueA: string = lineArr[2];
       const valueB: string = lineArr[3];
       const valueC: string = lineArr[4];
 
-      let valueY: string | number = 'Y';
+      let valueY: string | number = "Y";
 
       if (
         isValidNumber(valueA) &&
@@ -105,18 +105,18 @@ export class DescriptorsConsumer {
       }
 
       descriptorsResult.push(
-        `${Nmbr}\t${AutoId}\t${valueA}\t${valueB}\t${valueC}\t${valueY}`,
+        `${Nmbr}\t${AutoId}\t${valueA}\t${valueB}\t${valueC}\t${valueY}`
       );
     }
 
     const file: fs.WriteStream = fs.createWriteStream(
-      `/files/${userDirPath}/descriptorsResult.txt`,
+      `/files/${userDirPath}/descriptorsResult.txt`
     );
-    file.on('error', function (): void {
+    file.on("error", function (): void {
       /* error handling */
     });
     descriptorsResult.forEach(function (v: string): void {
-      file.write(v + '\n');
+      file.write(v + "\n");
     });
     file.end();
   }

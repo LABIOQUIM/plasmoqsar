@@ -2,36 +2,45 @@ import {
   Body,
   Controller,
   Get,
-  Param,
   Post,
+  Req,
   StreamableFile,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
-} from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { DescriptorsService } from './descriptors.service';
-import multerConfig from '../multer.config';
-import { DescriptorsDto } from './descriptors.dto';
+} from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { AuthGuard } from "src/auth.guard";
 
-@Controller('descriptors')
+import multerConfig from "../multer.config";
+
+import { DescriptorsDto } from "./descriptors.dto";
+import { DescriptorsService } from "./descriptors.service";
+
+@Controller("descriptors")
 export class DescriptorsController {
   constructor(private descriptorsService: DescriptorsService) {}
 
-  @Post('/')
-  @UseInterceptors(FileInterceptor('file', multerConfig))
+  @UseGuards(AuthGuard)
+  @Post("/")
+  @UseInterceptors(FileInterceptor("file", multerConfig))
   async calculateDescriptors(
     @Body() body: DescriptorsDto,
+    // eslint-disable-next-line no-undef
     @UploadedFile() file: Express.Multer.File,
+    @Req() req: Request
   ): Promise<void> {
-    this.descriptorsService.addToQueue(file, body.username);
+    // @ts-expect-error
+    this.descriptorsService.addToQueue(file, req.user.username);
   }
 
-  @Get('/:username')
-  async getDescriptors(
-    @Param('username') username: string,
-  ): Promise<StreamableFile> {
-    const file: Buffer =
-      await this.descriptorsService.retrieveDescriptors(username);
+  @UseGuards(AuthGuard)
+  @Get("/")
+  async getDescriptors(@Req() req: Request): Promise<StreamableFile> {
+    const file: Buffer = await this.descriptorsService.retrieveDescriptors(
+      // @ts-expect-error
+      req.user.username
+    );
 
     return new StreamableFile(file);
   }

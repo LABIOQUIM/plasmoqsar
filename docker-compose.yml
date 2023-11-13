@@ -6,7 +6,9 @@ services:
     build:
       context: .
       dockerfile: apps/api/Dockerfile.dev
-    command: ["yarn", "start:dev"]
+    command: sh -c "yarn prisma generate && yarn start:dev"
+    environment:
+      - JWT_SECRET="supersecret"
     restart: unless-stopped
     ports:
       - "3001:3000"
@@ -30,6 +32,27 @@ services:
       - /app/node_modules
       - /app/.next
 
+  studio:
+    image: labioquim/qsar-database-studio
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile.dev
+    command: sh -c "yarn prisma generate && yarn prisma studio"
+    restart: unless-stopped
+    ports:
+      - "5555:5555"
+    volumes:
+      - ./apps/api:/app
+      - /app/node_modules
+
+  database:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "qsar"
+    volumes:
+      - database:/var/lib/postgresql/data
+
   redis:
     image: redis:alpine
     restart: unless-stopped
@@ -37,6 +60,8 @@ services:
       - redis:/data
 
 volumes:
+  database:
+    driver: nfsvol
   files:
     driver: nfsvol
   redis:
