@@ -1,3 +1,7 @@
+.container {
+  text-decoration: none;
+}
+
 .user {
   display: block;
   width: 100%;

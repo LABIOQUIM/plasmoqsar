@@ -25,6 +25,7 @@ interface MainLink {
 
 const links: MainLink[] = [
   { icon: IconBulb, label: "Projects", href: "/projects" },
+  { icon: IconBulb, label: "Descriptors", href: "/descriptors" },
 ];
 
 const collections = [

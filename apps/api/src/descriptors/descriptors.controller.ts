@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Get,
   Post,
@@ -14,7 +13,6 @@ import { AuthGuard } from "src/auth.guard";
 
 import multerConfig from "../multer.config";
 
-import { DescriptorsDto } from "./descriptors.dto";
 import { DescriptorsService } from "./descriptors.service";
 
 @Controller("descriptors")
@@ -25,7 +23,6 @@ export class DescriptorsController {
   @Post("/")
   @UseInterceptors(FileInterceptor("file", multerConfig))
   async calculateDescriptors(
-    @Body() body: DescriptorsDto,
     // eslint-disable-next-line no-undef
     @UploadedFile() file: Express.Multer.File,
     @Req() req: Request

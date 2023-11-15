@@ -20,7 +20,7 @@ export class DescriptorsConsumer {
     const userDirPath = data.filename.split("/")[0];
     const filename = data.filename.split("/")[1];
 
-    const command: string = `Mold2 -i /files/${userDirPath}/${filename} -o /files/${userDirPath}/out.txt`;
+    const command: string = `Mold2 -i /files/${userDirPath}/${filename} -o /files/${userDirPath}/out.txt -r /files/${userDirPath}/report.txt`;
 
     execSync(command);
 

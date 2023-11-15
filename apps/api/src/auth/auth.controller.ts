@@ -9,6 +9,6 @@ export class AuthController {
 
   @Post("/")
   async login(@Body() body: AuthDto) {
-    return this.authService.validateUser(body.username, body.pass);
+    return this.authService.validateUser(body.identifier, body.pass);
   }
 }

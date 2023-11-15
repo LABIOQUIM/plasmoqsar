@@ -1,3 +1,4 @@
 Dockerfile.dev
 bin
 .gitignore
+node_modules

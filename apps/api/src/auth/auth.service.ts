@@ -10,8 +10,8 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOneByUsername(username);
+  async validateUser(identifier: string, pass: string): Promise<any> {
+    const user = await this.usersService.findOneByIdentifier(identifier);
 
     if (!user) {
       throw new HttpException("USER_NOT_FOUND", HttpStatus.NOT_FOUND);
@@ -24,7 +24,9 @@ export class AuthService {
     throw new HttpException("INVALID_CREDENTIALS", HttpStatus.UNAUTHORIZED);
   }
 
-  async generateJWT(payload: Omit<User, "password">) {
+  async generateJWT(payload: User) {
+    delete payload.password;
+
     return {
       accessToken: this.jwtService.sign(
         { username: payload.username },
@@ -33,6 +35,7 @@ export class AuthService {
           expiresIn: "10m",
         }
       ),
+      user: payload,
     };
   }
 }

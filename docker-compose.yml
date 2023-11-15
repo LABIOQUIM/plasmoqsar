@@ -23,6 +23,9 @@ services:
       dockerfile: apps/ui/Dockerfile.dev
     image: labioquim/qsar-ui
     command: ["yarn", "dev"]
+    environment:
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=ssecrett
     ports:
       - "3002:3000"
     depends_on:
