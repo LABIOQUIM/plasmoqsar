@@ -5,9 +5,9 @@ import { Dropzone } from "@mantine/dropzone";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { IconFileDescription, IconUpload, IconX } from "@tabler/icons-react";
-import { signOut } from "next-auth/react";
 
-import { sendQSARToQueue } from "./sendQSARToQueue";
+import { sendQSARToQueue } from "../sendQSARToQueue";
+import { useQSARDescriptorsQuery } from "../useQSARDescriptors";
 
 import classes from "./QSARForm.module.css";
 
@@ -15,15 +15,28 @@ interface QSARFormInputs {
   file: File;
 }
 
-export default function QSARForm() {
-  const { onSubmit, setValues, values } = useForm<QSARFormInputs>();
+interface Props {
+  close(): void;
+}
+
+export default function QSARForm({ close }: Props) {
   const [isLoading, setIsLoading] = useState(false);
+  const { onSubmit, setValues, values } = useForm<QSARFormInputs>();
+  const { refetch } = useQSARDescriptorsQuery();
 
   function doSubmit({ file }: QSARFormInputs) {
     setIsLoading(true);
     const data = new FormData();
     data.append("file", file);
-    sendQSARToQueue(data).then(() => setIsLoading(false));
+    sendQSARToQueue(data).then(() => {
+      refetch();
+      notifications.show({
+        color: "green",
+        message: "SDF added to execution queue.",
+      });
+      setIsLoading(false);
+      close();
+    });
   }
 
   return (
@@ -32,7 +45,6 @@ export default function QSARForm() {
       className={classes.container}
       onSubmit={onSubmit(doSubmit)}
     >
-      <Button onClick={() => signOut({ redirect: false })}>Sign Out</Button>
       <Dropzone
         loading={isLoading}
         classNames={{
@@ -95,7 +107,7 @@ export default function QSARForm() {
         ) : (
           <div>
             <Text size="xl" inline>
-              Drag a <b>.sdf</b> here or click to select files
+              Drag a <b>.sdf</b> here or click to select it
             </Text>
             <Text size="sm" c="dimmed" inline mt={7}>
               Attach one file at a time.

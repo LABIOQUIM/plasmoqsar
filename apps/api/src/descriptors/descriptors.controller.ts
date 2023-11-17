@@ -1,14 +1,15 @@
 import {
   Controller,
   Get,
+  Param,
   Post,
   Req,
-  StreamableFile,
   UploadedFile,
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
+import { Descriptor } from "@prisma/client";
 import { AuthGuard } from "src/auth.guard";
 
 import multerConfig from "../multer.config";
@@ -33,12 +34,20 @@ export class DescriptorsController {
 
   @UseGuards(AuthGuard)
   @Get("/")
-  async getDescriptors(@Req() req: Request): Promise<StreamableFile> {
-    const file: Buffer = await this.descriptorsService.retrieveDescriptors(
+  async getDescriptors(@Req() req: Request): Promise<Partial<Descriptor>[]> {
+    const descriptors = await this.descriptorsService.retrieveDescriptors(
       // @ts-expect-error
       req.user.username
     );
 
-    return new StreamableFile(file);
+    return descriptors;
+  }
+
+  @UseGuards(AuthGuard)
+  @Get("/:id")
+  async getDescriptor(@Param("id") id: string): Promise<Descriptor> {
+    const descriptors = await this.descriptorsService.retrieveDescriptor(id);
+
+    return descriptors;
   }
 }

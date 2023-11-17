@@ -10,21 +10,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum DESCRIPTOR_STATUS {
+  AWAITING
+  RUNNING
+  ERRORED
+  SUCCESS
+}
+
 model User {
   id        String   @id @default(uuid())
+  firstName String   @map("first_name")
+  lastName  String?  @map("last_name")
   email     String   @unique
   username  String   @unique
   password  String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  descriptors Descriptor[]
+
   @@map("users")
 }
 
 model Descriptor {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String            @id @default(uuid())
+  sdfName   String            @map("sdf_name")
+  yValues   String[]          @map("y_values")
+  status    DESCRIPTOR_STATUS @default(AWAITING)
+  error     String?
+  userId    String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
 
   @@map("descriptors")
 }

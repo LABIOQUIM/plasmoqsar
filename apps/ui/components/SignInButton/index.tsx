@@ -22,17 +22,22 @@ export function SignInButton(props: Props): ReactElement {
   }
 
   if (status === "authenticated") {
+    const userFullName = `${data.user.firstName} ${data.user.lastName}`;
+
     return (
       <Link href="/account" className={classes.container}>
         <UnstyledButton className={classes.user} {...props}>
           <Group>
             <Avatar radius="xl">
-              {data.user.username.split(" ").map((w) => w[0].toUpperCase())}
+              {userFullName
+                .trim()
+                .split(" ")
+                .map((w) => w[0].toUpperCase())}
             </Avatar>
 
             <div style={{ flex: 1 }}>
               <Text size="sm" fw={500}>
-                {data.user.username}
+                {userFullName.trim()}
               </Text>
 
               <Text c="dimmed" size="xs">

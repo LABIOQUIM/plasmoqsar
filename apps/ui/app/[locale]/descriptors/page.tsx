@@ -1,21 +1,44 @@
-import { Box, SimpleGrid, Title } from "@mantine/core";
+import { Group, Title } from "@mantine/core";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 import { PageLayout } from "@/components/PageLayout";
+import { authOptions } from "@/lib/auth";
+import { queryClient } from "@/lib/queryClient";
 
-const QSARForm = dynamic(() => import("./QSARForm"), {
+import { getQSARDescriptors } from "./getQSARDescriptors";
+
+const QSARFormModal = dynamic(() => import("./QSARFormModal"), {
   ssr: false,
 });
 
-export default function Page() {
-  return (
-    <PageLayout>
-      <Title>Calculate new Y</Title>
+const DescriptorsList = dynamic(() => import("./DescriptorsList"), {
+  ssr: false,
+});
 
-      <SimpleGrid cols={{ base: 1, lg: 2 }}>
-        <QSARForm />
-        <Box>{/* Maybe an image here */}</Box>
-      </SimpleGrid>
-    </PageLayout>
+export default async function Page() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/login");
+  }
+
+  await queryClient.prefetchQuery({
+    queryKey: ["user-descriptors"],
+    queryFn: () => getQSARDescriptors(),
+  });
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <PageLayout>
+        <Group gap="lg">
+          <Title>My Molecules</Title>
+          <QSARFormModal />
+        </Group>
+        <DescriptorsList />
+      </PageLayout>
+    </HydrationBoundary>
   );
 }

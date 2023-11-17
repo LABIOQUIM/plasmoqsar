@@ -4,6 +4,8 @@ import NextAuth, { DefaultSession } from "next-auth";
 declare global {
   interface AppUser {
     id: string;
+    firstName: string;
+    lastName?: string;
     username: string;
     email: string;
     createdAt: string;

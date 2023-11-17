@@ -10,7 +10,8 @@ const multerConfig = {
 
       const extension = path.parse(file.originalname).ext;
 
-      const userDir = `/files/${req.headers["x-username"]}`;
+      // @ts-expect-error
+      const userDir = `/files/${req.user.username}`;
 
       if (fs.existsSync(userDir)) {
         fs.rmSync(userDir, { recursive: true, force: true });
@@ -20,7 +21,8 @@ const multerConfig = {
         fs.mkdirSync(userDir);
       }
 
-      cb(null, `${req.headers["x-username"]}/${fileName}${extension}`);
+      // @ts-expect-error
+      cb(null, `${req.user.username}/${fileName}${extension}`);
     },
   }),
 };

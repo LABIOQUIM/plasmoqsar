@@ -10,6 +10,8 @@ type Select = {
 export class UsersService {
   private select: Select = {
     id: true,
+    firstName: true,
+    lastName: true,
     email: true,
     username: true,
     password: false,

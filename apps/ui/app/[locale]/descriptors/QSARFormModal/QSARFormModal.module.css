@@ -1,0 +1,4 @@
+.title {
+  font-weight: bold;
+  font-size: var(--mantine-font-size-xl);
+}

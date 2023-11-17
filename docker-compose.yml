@@ -9,7 +9,6 @@ services:
     command: sh -c "yarn prisma generate && yarn start:dev"
     environment:
       - JWT_SECRET="supersecret"
-    restart: unless-stopped
     ports:
       - "3001:3000"
     volumes:
@@ -24,7 +23,7 @@ services:
     image: labioquim/qsar-ui
     command: ["yarn", "dev"]
     environment:
-      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_URL=http://localhost:3002
       - NEXTAUTH_SECRET=ssecrett
     ports:
       - "3002:3000"
@@ -41,7 +40,6 @@ services:
       context: .
       dockerfile: apps/api/Dockerfile.dev
     command: sh -c "yarn prisma generate && yarn prisma studio"
-    restart: unless-stopped
     ports:
       - "5555:5555"
     volumes:
@@ -58,7 +56,6 @@ services:
 
   redis:
     image: redis:alpine
-    restart: unless-stopped
     volumes:
       - redis:/data
 

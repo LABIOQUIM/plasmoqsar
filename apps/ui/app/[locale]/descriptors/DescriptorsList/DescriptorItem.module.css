@@ -1,0 +1,63 @@
+.container {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-xs);
+  padding: var(--mantine-spacing-sm);
+
+  &:hover {
+    filter: light-dark(brightness(95%), brightness(125%));
+  }
+}
+
+.errorText {
+  color: var(--mantine-color-red-5);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-md);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background-color: var(--mantine-color-body);
+  transition: box-shadow 150ms ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-bottom: rem(1px) solid
+      light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-3));
+  }
+}
+
+.scrolled {
+  box-shadow: var(--mantine-shadow-sm);
+}
+
+.title {
+  font-weight: bold;
+  font-size: var(--mantine-font-size-xl);
+}
+
+.success {
+  border-color: light-dark(var(--mantine-color-green-7), var(--mantine-color-green-4));
+}
+
+.awaiting {
+  border-color: light-dark(var(--mantine-color-yellow-7), var(--mantine-color-yellow-4));
+}
+
+.errored {
+  border-color: light-dark(var(--mantine-color-red-7), var(--mantine-color-red-4));
+}
+
+.running {
+  border-color: light-dark(var(--mantine-color-blue-7), var(--mantine-color-blue-4));
+}

@@ -5,14 +5,20 @@ import { api } from "./api";
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    maxAge: 600,
+    updateAge: 30 * 24 * 60 * 60,
+  },
   jwt: {
-    maxAge: 10 * 60,
+    maxAge: 600,
   },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.user = {
           id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
           username: user.username,
           email: user.email!,
           createdAt: user.createdAt,

@@ -3,6 +3,7 @@ import { BullBoardModule } from "@bull-board/nestjs";
 import { BullModule } from "@nestjs/bull";
 import { Module } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import { PrismaService } from "src/prisma/prisma.service";
 
 import { DescriptorsConsumer } from "./descriptors.consumer";
 import { DescriptorsController } from "./descriptors.controller";
@@ -20,6 +21,11 @@ import { DescriptorsService } from "./descriptors.service";
     }),
   ],
   controllers: [DescriptorsController],
-  providers: [DescriptorsService, JwtService, DescriptorsConsumer],
+  providers: [
+    DescriptorsService,
+    JwtService,
+    DescriptorsConsumer,
+    PrismaService,
+  ],
 })
 export class DescriptorsModule {}
