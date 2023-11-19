@@ -2,6 +2,7 @@
 files
 node_modules
 report.txt
+.env
 
 .yarn/*
 !.yarn/patches
