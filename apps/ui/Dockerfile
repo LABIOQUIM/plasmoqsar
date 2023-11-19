@@ -1,24 +1,31 @@
 FROM node:20-alpine AS base
 LABEL authors="ivopr"
 
-# Install dependencies only when needed
-FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
+RUN corepack enable && corepack prepare yarn@3.6.4 --activate
+
+# Install dependencies only when needed
+FROM base AS deps
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY apps/ui/package.json yarn.lock ./
+COPY package.json .yarnrc.yml yarn.lock ./
+COPY apps/ui/package.json apps/ui/.yarnrc.yml ./apps/ui/
+COPY packages ./packages
 RUN yarn install
-
+RUN yarn workspace database generate
+RUN yarn workspace database build
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-COPY apps/ui .
 COPY --from=deps /app/node_modules ./node_modules
+COPY package.json .yarnrc.yml yarn.lock ./
+COPY apps/ui ./apps/ui
+COPY packages ./packages
 
-RUN yarn build
+RUN yarn workspace ui build
 
 FROM base AS runner
 WORKDIR /app
@@ -38,8 +45,8 @@ RUN chown nextjs:nodejs .next
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/ui/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/ui/.next/static ./apps/ui/.next/static
 
 USER nextjs
 
@@ -49,4 +56,5 @@ ENV PORT 3000
 # set hostname to localhost
 ENV HOSTNAME "0.0.0.0"
 
-CMD ["node", "server.js"]
+# CMD ["sleep", "infinity"]
+CMD ["node", "apps/ui/server.js"]

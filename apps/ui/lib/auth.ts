@@ -44,12 +44,14 @@ export const authOptions: NextAuthOptions = {
         pass: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        console.log("authorize");
         if (credentials) {
+          console.log("has creds");
           const response = await api.post<AuthResponse>("/auth", credentials);
 
-          if (response.status === 201) {
-            api.defaults.headers.Authorization = `Bearer ${response.data.accessToken}`;
+          console.log(response.data);
 
+          if (response.status === 201) {
             return {
               ...response.data.user,
               accessToken: response.data.accessToken,
@@ -57,7 +59,7 @@ export const authOptions: NextAuthOptions = {
           }
         }
 
-        return null;
+        throw new Error("failed");
       },
     }),
   ],

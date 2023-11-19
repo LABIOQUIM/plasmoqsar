@@ -20,11 +20,28 @@ RUN yarn workspace database build
 
 # Rebuild the source code only when needed
 FROM base AS builder
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY package.json .yarnrc.yml yarn.lock ./
+COPY apps/api ./apps/api
+COPY packages ./packages
+
+RUN yarn workspace api build
+
+FROM base AS runner
 
 COPY apps/api/bin/Mold2 /bin/Mold2
-
 RUN chmod +x /bin/Mold2
 
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
+COPY package.json .yarnrc.yml yarn.lock ./
+COPY apps/api/dist ./apps/api/dist
+COPY apps/api/package.json ./apps/api
+COPY packages ./packages
+
+EXPOSE 3000
+
+CMD ["yarn", "workspace", "api", "start:prod"]

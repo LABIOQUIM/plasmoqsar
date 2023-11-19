@@ -32,11 +32,12 @@ export default function LoginForm() {
   const router = useRouter();
 
   async function doLogin({ identifier, pass }: FormInputs) {
-    await signIn("credentials", {
+    signIn("credentials", {
       identifier,
       pass,
       redirect: false,
     }).then((res) => {
+      console.log(res);
       if (res && res.error) {
         notifications.show({
           color: "red",

@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  api:
+    image: labioquim/qsar-api:prod
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    volumes:
+      - files:/files
+
+  ui:
+    build:
+      context: .
+      dockerfile: apps/ui/Dockerfile
+    image: labioquim/qsar-ui:prod
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+  database:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "qsar"
+    volumes:
+      - database:/var/lib/postgresql/data
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis:/data
+
+volumes:
+  database:
+    driver: nfsvol
+  files:
+    driver: nfsvol
+  redis:
+    driver: nfsvol

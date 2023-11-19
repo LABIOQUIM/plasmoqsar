@@ -6,13 +6,13 @@ services:
     build:
       context: .
       dockerfile: apps/api/Dockerfile.dev
-    command: sh -c "yarn prisma generate && yarn start:dev"
+    command: ['yarn', 'workspace', 'api', 'start:dev']
     environment:
       - JWT_SECRET="supersecret"
     ports:
       - "3001:3000"
     volumes:
-      - ./apps/api:/app
+      - ./:/app
       - files:/files
       - /app/node_modules
 
@@ -21,30 +21,18 @@ services:
       context: .
       dockerfile: apps/ui/Dockerfile.dev
     image: labioquim/qsar-ui
-    command: ["yarn", "dev"]
+    command: ["yarn", "workspace", "ui", "dev"]
     environment:
       - NEXTAUTH_URL=http://localhost:3002
       - NEXTAUTH_SECRET=ssecrett
     ports:
-      - "3002:3000"
+      - "3000:3000"
     depends_on:
       - api
     volumes:
-      - ./apps/ui:/app
+      - ./:/app
       - /app/node_modules
-      - /app/.next
-
-  studio:
-    image: labioquim/qsar-database-studio
-    build:
-      context: .
-      dockerfile: apps/api/Dockerfile.dev
-    command: sh -c "yarn prisma generate && yarn prisma studio"
-    ports:
-      - "5555:5555"
-    volumes:
-      - ./apps/api:/app
-      - /app/node_modules
+      - /app/apps/ui/.next
 
   database:
     image: postgres:15-alpine
