@@ -2,7 +2,7 @@
 dist
 node_modules
 report.txt
-.env
+!.env
 
 # Logs
 logs
