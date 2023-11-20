@@ -1,26 +1,13 @@
 import { HTMLAttributes, ReactElement } from "react";
-import { Avatar, Box, Group, rem, Text, UnstyledButton } from "@mantine/core";
+import { Avatar, Group, rem, Text, UnstyledButton } from "@mantine/core";
 import { IconChevronRight, IconUserPlus } from "@tabler/icons-react";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-
-import { LoadingBox } from "../LoadingBox";
 
 import classes from "./RegisterButton.module.css";
 
 interface Props extends HTMLAttributes<HTMLButtonElement> {}
 
 export function RegisterButton(props: Props): ReactElement {
-  const { status } = useSession();
-
-  if (status === "loading") {
-    return (
-      <Box className={classes.user}>
-        <LoadingBox />
-      </Box>
-    );
-  }
-
   return (
     <Link href="/register" className={classes.container}>
       <UnstyledButton className={classes.user} {...props}>

@@ -1,16 +1,14 @@
 "use server";
-import { getServerSession } from "next-auth";
-
+import { getSession } from "@/hooks/getSession";
 import { api } from "@/lib/api";
-import { authOptions } from "@/lib/auth";
 
 export async function sendQSARToQueue(data: FormData) {
-  const session = await getServerSession(authOptions);
+  const session = await getSession();
 
   await api
     .post("/v1/descriptors", data, {
       headers: {
-        Authorization: `Bearer ${session?.accessToken}`,
+        "x-username": session.user.username,
       },
     })
     .then(({ data }) => console.log(data))

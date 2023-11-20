@@ -2,13 +2,13 @@ version: "3"
 
 services:
   api:
-    image: labioquim/qsar-api
+    image: labioquim/qsar-api:dev
     build:
       context: .
       dockerfile: apps/api/Dockerfile.dev
     command: ['yarn', 'workspace', 'api', 'start:dev']
-    environment:
-      - JWT_SECRET="supersecret"
+    links:
+      - database
     ports:
       - "3001:3000"
     volumes:
@@ -20,7 +20,7 @@ services:
     build:
       context: .
       dockerfile: apps/ui/Dockerfile.dev
-    image: labioquim/qsar-ui
+    image: labioquim/qsar-ui:dev
     command: ["yarn", "workspace", "ui", "dev"]
     environment:
       - NEXTAUTH_URL=http://localhost:3002
@@ -33,6 +33,18 @@ services:
       - ./:/app
       - /app/node_modules
       - /app/apps/ui/.next
+
+  studio:
+    build:
+      context: .
+      dockerfile: packages/database/Dockerfile.dev
+    image: labioquim/qsar-studio:dev
+    command: "sh -c 'yarn workspace database generate && yarn workspace database studio'"
+    ports:
+      - "5555:5555"
+    volumes:
+      - ./:/app
+      - /app/node_modules
 
   database:
     image: postgres:15-alpine

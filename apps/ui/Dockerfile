@@ -21,7 +21,7 @@ RUN yarn workspace database build
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY package.json .yarnrc.yml yarn.lock ./
+COPY package.json .yarnrc.yml yarn.lock .env ./
 COPY apps/ui ./apps/ui
 COPY packages ./packages
 

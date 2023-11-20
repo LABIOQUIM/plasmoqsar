@@ -11,7 +11,7 @@ const multerConfig = {
       const extension = path.parse(file.originalname).ext;
 
       // @ts-expect-error
-      const userDir = `/files/${req.user.username}`;
+      const userDir = `/files/${req.username}`;
 
       if (fs.existsSync(userDir)) {
         fs.rmSync(userDir, { recursive: true, force: true });
@@ -22,7 +22,7 @@ const multerConfig = {
       }
 
       // @ts-expect-error
-      cb(null, `${req.user.username}/${fileName}${extension}`);
+      cb(null, `${req.username}/${fileName}${extension}`);
     },
   }),
 };

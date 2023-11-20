@@ -1,28 +1,18 @@
 import { HTMLAttributes, ReactElement } from "react";
-import { Avatar, Box, Group, rem, Text, UnstyledButton } from "@mantine/core";
+import { Avatar, Group, rem, Text, UnstyledButton } from "@mantine/core";
 import { IconChevronRight } from "@tabler/icons-react";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-
-import { LoadingBox } from "../LoadingBox";
 
 import classes from "./SignInButton.module.css";
 
-interface Props extends HTMLAttributes<HTMLButtonElement> {}
+interface Props extends HTMLAttributes<HTMLButtonElement> {
+  session: any;
+}
 
-export function SignInButton(props: Props): ReactElement {
-  const { data, status } = useSession();
-
-  if (status === "loading") {
-    return (
-      <Box className={classes.user}>
-        <LoadingBox />
-      </Box>
-    );
-  }
-
-  if (status === "authenticated") {
-    const userFullName = `${data.user.firstName} ${data.user.lastName}`;
+export function SignInButton({ session, ...props }: Props): ReactElement {
+  console.log(session);
+  if (session) {
+    const userFullName = `${session.user.firstName} ${session.user.lastName}`;
 
     return (
       <Link href="/account" className={classes.container}>
@@ -41,7 +31,7 @@ export function SignInButton(props: Props): ReactElement {
               </Text>
 
               <Text c="dimmed" size="xs">
-                {data.user.email}
+                {session.user.email}
               </Text>
             </div>
 

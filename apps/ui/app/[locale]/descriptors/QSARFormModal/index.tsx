@@ -51,9 +51,7 @@ export default function QSARFormModal() {
         >
           Submit new SDF
         </Button>
-        <Button disabled={isDisabled} onClick={() => refetch()}>
-          Reload List
-        </Button>
+        <Button onClick={() => refetch()}>Reload List</Button>
       </Group>
     </>
   );

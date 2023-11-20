@@ -1,11 +1,11 @@
 "use client";
 import { ReactElement } from "react";
 import { Badge, Group, Text, UnstyledButton } from "@mantine/core";
-import { Icon, IconBulb, IconLogout } from "@tabler/icons-react";
+import { Icon, IconCell, IconLogout } from "@tabler/icons-react";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
 
 import { SignInButton } from "@/components/SignInButton";
+import { invalidateSession } from "@/hooks/invalidateSession";
 
 import { RegisterButton } from "../RegisterButton";
 
@@ -19,16 +19,15 @@ interface MainLink {
 }
 
 const links: MainLink[] = [
-  { icon: IconBulb, label: "Descriptors", href: "/descriptors" },
+  { icon: IconCell, label: "Descriptors", href: "/descriptors" },
 ];
 
 interface Props {
   toggle(): void;
+  session: any;
 }
 
-export function Navbar({ toggle }: Props): ReactElement {
-  const { status } = useSession();
-
+export function Navbar({ toggle, session }: Props): ReactElement {
   const mainLinks = links.map((link) => (
     <UnstyledButton
       component={Link}
@@ -53,24 +52,22 @@ export function Navbar({ toggle }: Props): ReactElement {
     <>
       <div className={classes.section}>
         {/* Signed out users get sign in button */}
-        <SignInButton />
+        <SignInButton session={session} />
       </div>
 
-      {status === "authenticated" ? (
+      {session ? (
         <div className={classes.section}>
           <div className={classes.mainLinks}>
             {...mainLinks}
-            {status === "authenticated" && (
-              <UnstyledButton
-                className={classes.mainLink}
-                onClick={() => signOut()}
-              >
-                <Group className={classes.sectionLogout} gap="md">
-                  <IconLogout />
-                  <Text>Logout</Text>
-                </Group>
-              </UnstyledButton>
-            )}
+            <UnstyledButton
+              className={classes.mainLink}
+              onClick={() => invalidateSession()}
+            >
+              <Group className={classes.sectionLogout} gap="md">
+                <IconLogout />
+                <Text>Logout</Text>
+              </Group>
+            </UnstyledButton>
           </div>
         </div>
       ) : (

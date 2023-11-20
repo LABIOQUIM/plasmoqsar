@@ -1,9 +1,36 @@
 "use server";
+import * as context from "next/headers";
 
-import { api } from "@/lib/api";
+import { auth } from "@/lib/lucia";
 
 export async function registerUser(data: RegisterFormInputs) {
-  await api.post("/v1/users", data);
+  try {
+    const user = await auth.createUser({
+      key: {
+        providerId: "username", // auth method
+        providerUserId: data.username.toLowerCase(), // unique id when using "username" auth method
+        password: data.password, // hashed by Lucia
+      },
+      attributes: {
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        username: data.username,
+      },
+    });
+    const session = await auth.createSession({
+      userId: user.userId,
+      attributes: {},
+    });
+    const authRequest = auth.handleRequest("POST", context);
+    authRequest.setSession(session);
+  } catch (e) {
+    console.log(e);
+    // @ts-expect-error
+    if (e && e.code && e.code === "P2002") {
+      return "existing-user";
+    }
 
-  return "success";
+    return "unknown-error";
+  }
 }

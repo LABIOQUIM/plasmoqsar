@@ -45,7 +45,7 @@ export default function RegisterForm() {
           color: "green",
           message: "Your account has been created.",
         });
-        router.push("/login");
+        router.push("/descriptors");
       })
       .finally(() => {
         setIsLoading(false);
@@ -95,6 +95,7 @@ export default function RegisterForm() {
         label="Password"
         placeholder="******"
         withAsterisk
+        type="password"
         {...getInputProps("password")}
       />
 

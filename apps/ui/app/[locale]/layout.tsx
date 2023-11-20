@@ -1,9 +1,10 @@
 import { PropsWithChildren } from "react";
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 import { DatesProvider } from "@mantine/dates";
 import { Notifications } from "@mantine/notifications";
 
 import { Shell } from "@/components/Shell";
+import { getSession } from "@/hooks/getSession";
 import { theme } from "@/theme";
 
 import "@mantine/core/styles.layer.css";
@@ -11,11 +12,18 @@ import "@mantine/dates/styles.layer.css";
 import "@mantine/dropzone/styles.layer.css";
 import "@mantine/notifications/styles.layer.css";
 
-export default function RootLayout({ children }: PropsWithChildren) {
+// const ColorSchemeScript = dynamic(
+//   () => import("@mantine/core").then((mod) => mod.ColorSchemeScript),
+//   { ssr: false }
+// );
+
+export default async function RootLayout({ children }: PropsWithChildren) {
+  const session = await getSession();
+
   return (
     <html lang="en">
       <head>
-        <ColorSchemeScript />
+        {/* <ColorSchemeScript /> */}
         <link rel="shortcut icon" href="/favicon.svg" />
         <meta
           name="viewport"
@@ -26,7 +34,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <MantineProvider theme={theme}>
           <DatesProvider settings={{}}>
             <Notifications position="top-right" />
-            <Shell>{children}</Shell>
+            <Shell session={session}>{children}</Shell>
           </DatesProvider>
         </MantineProvider>
       </body>

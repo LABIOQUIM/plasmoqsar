@@ -5,7 +5,7 @@ import { AppModule } from "./app.module";
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix("v1", { exclude: ["auth"] });
+  app.setGlobalPrefix("v1");
 
   const config = new DocumentBuilder()
     .setTitle("QSAR API")

@@ -23,6 +23,7 @@ export class DescriptorsService {
         },
       },
     });
+
     await this.descriptorsQueue.add("calculate-descriptors", {
       descriptorId: newDescriptor.id,
       username,

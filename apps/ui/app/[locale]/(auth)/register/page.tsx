@@ -1,21 +1,17 @@
 import { Box, SimpleGrid, Title } from "@mantine/core";
 import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
 
 import { PageLayout } from "@/components/PageLayout";
-import { authOptions } from "@/lib/auth";
+import { getSession } from "@/hooks/getSession";
 
 const RegisterForm = dynamic(() => import("./RegisterForm"), {
   ssr: false,
 });
 
 export default async function Page() {
-  const session = await getServerSession(authOptions);
-
-  if (session) {
-    redirect("/descriptors");
-  }
+  const session = await getSession();
+  if (session) redirect("/descriptors");
 
   return (
     <PageLayout>

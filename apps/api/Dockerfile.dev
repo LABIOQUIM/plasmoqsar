@@ -17,6 +17,7 @@ COPY packages ./packages
 RUN yarn install
 RUN yarn workspace database generate
 RUN yarn workspace database build
+RUN yarn install
 
 # Rebuild the source code only when needed
 FROM base AS builder

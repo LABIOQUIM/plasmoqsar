@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { Box, Title } from "@mantine/core";
-import { IconMessages } from "@tabler/icons-react";
+import { IconMicroscope } from "@tabler/icons-react";
 import Link from "next/link";
 
 export function Logo(): ReactElement {
@@ -18,7 +18,7 @@ export function Logo(): ReactElement {
         userSelect: "none",
       })}
     >
-      <IconMessages />
+      <IconMicroscope />
       <Title
         styles={(theme) => ({
           root: {

@@ -10,7 +10,8 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { Descriptor } from "@prisma/client";
-import { AuthGuard } from "src/auth.guard";
+import { Request } from "express";
+import { UsernameGuard } from "src/username.guard";
 
 import multerConfig from "../multer.config";
 
@@ -20,7 +21,7 @@ import { DescriptorsService } from "./descriptors.service";
 export class DescriptorsController {
   constructor(private descriptorsService: DescriptorsService) {}
 
-  @UseGuards(AuthGuard)
+  @UseGuards(UsernameGuard)
   @Post("/")
   @UseInterceptors(FileInterceptor("file", multerConfig))
   async calculateDescriptors(
@@ -29,25 +30,24 @@ export class DescriptorsController {
     @Req() req: Request
   ): Promise<void> {
     // @ts-expect-error
-    this.descriptorsService.addToQueue(file, req.user.username);
+    this.descriptorsService.addToQueue(file, req.username);
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(UsernameGuard)
   @Get("/")
   async getDescriptors(@Req() req: Request): Promise<Partial<Descriptor>[]> {
     const descriptors = await this.descriptorsService.retrieveDescriptors(
       // @ts-expect-error
-      req.user.username
+      req.username
     );
 
     return descriptors;
   }
 
-  @UseGuards(AuthGuard)
   @Get("/:id")
   async getDescriptor(@Param("id") id: string): Promise<Descriptor> {
-    const descriptors = await this.descriptorsService.retrieveDescriptor(id);
+    const descriptor = await this.descriptorsService.retrieveDescriptor(id);
 
-    return descriptors;
+    return descriptor;
   }
 }

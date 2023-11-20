@@ -2,10 +2,9 @@ import { Group, Title } from "@mantine/core";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
 
 import { PageLayout } from "@/components/PageLayout";
-import { authOptions } from "@/lib/auth";
+import { getSession } from "@/hooks/getSession";
 import { queryClient } from "@/lib/queryClient";
 
 import { getQSARDescriptors } from "./getQSARDescriptors";
@@ -19,11 +18,8 @@ const DescriptorsList = dynamic(() => import("./DescriptorsList"), {
 });
 
 export default async function Page() {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    redirect("/login");
-  }
+  const session = await getSession();
+  if (!session) redirect("/login?reason=unauthorized");
 
   await queryClient.prefetchQuery({
     queryKey: ["user-descriptors"],

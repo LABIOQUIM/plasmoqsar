@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { Box, Group, Modal, Paper, Table, Text, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconClockPlus, IconClockUp } from "@tabler/icons-react";
@@ -21,7 +21,7 @@ const StatusStyles = {
   RUNNING: classes.running,
 };
 
-export function DescriptorItem({ descriptor }: Props) {
+function BaseDescriptorItem({ descriptor }: Props) {
   const [opened, { open, close }] = useDisclosure(false);
   const { data, refetch, isLoading, isRefetching } = useQSARDescriptorQuery(
     descriptor.id
@@ -36,7 +36,7 @@ export function DescriptorItem({ descriptor }: Props) {
 
   let rows: JSX.Element[] = [];
 
-  if (data && data !== "no-session") {
+  if (data) {
     rows = data.yValues.map((element) => {
       const elements = element.split("\t");
 
@@ -82,7 +82,7 @@ export function DescriptorItem({ descriptor }: Props) {
           )}
         </Group>
 
-        {data && data !== "no-session" ? (
+        {data ? (
           <Table>
             <Table.Thead>
               <Table.Tr>
@@ -136,3 +136,16 @@ export function DescriptorItem({ descriptor }: Props) {
     </>
   );
 }
+
+type DescriptorKeys = keyof Descriptor;
+
+export const DescriptorItem = memo(
+  BaseDescriptorItem,
+  (prevProps, nextProps) => {
+    return Object.entries(nextProps.descriptor).every(
+      ([key, value]) =>
+        Object.prototype.hasOwnProperty.call(prevProps.descriptor, key) &&
+        prevProps.descriptor[key as DescriptorKeys] === value
+    );
+  }
+);

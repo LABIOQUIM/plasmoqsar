@@ -6,6 +6,7 @@ services:
     build:
       context: .
       dockerfile: apps/api/Dockerfile
+    env_file: .env
     volumes:
       - files:/files
 
@@ -18,12 +19,18 @@ services:
       - "3000:3000"
     depends_on:
       - api
+      - database
+    links:
+      - api
+      - database
 
   database:
     image: postgres:15-alpine
     environment:
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: "qsar"
+    ports:
+      - "5432:5432"
     volumes:
       - database:/var/lib/postgresql/data
 

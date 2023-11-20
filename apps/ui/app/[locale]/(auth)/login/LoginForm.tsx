@@ -3,27 +3,28 @@ import { Box, Button, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+
+import { signIn } from "./signIn";
 
 import classes from "./LoginForm.module.css";
 
 interface FormInputs {
-  identifier: string;
-  pass: string;
+  username: string;
+  password: string;
 }
 
 export default function LoginForm() {
   const { getInputProps, onSubmit } = useForm<FormInputs>({
     initialValues: {
-      identifier: "",
-      pass: "",
+      username: "",
+      password: "",
     },
     validate: {
-      identifier: (value) =>
+      username: (value) =>
         value.length < 4
           ? "Your email and username both have more than 3 characters"
           : null,
-      pass: (value) =>
+      password: (value) =>
         value.length < 6
           ? "The password can't be less than 6 characters"
           : null,
@@ -31,19 +32,19 @@ export default function LoginForm() {
   });
   const router = useRouter();
 
-  async function doLogin({ identifier, pass }: FormInputs) {
-    signIn("credentials", {
-      identifier,
-      pass,
-      redirect: false,
-    }).then((res) => {
-      console.log(res);
-      if (res && res.error) {
+  async function doLogin({ username, password }: FormInputs) {
+    signIn(username, password).then((res) => {
+      if (res === "invalid-credentials") {
         notifications.show({
           color: "red",
-          message: "Identifier or password incorrect",
+          message: "Username or Password incorrect",
         });
-      } else if (res && !res.error) {
+      } else if (res === "unknown-error") {
+        notifications.show({
+          color: "red",
+          message: "Something went wrong.",
+        });
+      } else {
         router.replace("/descriptors");
       }
     });
@@ -55,12 +56,13 @@ export default function LoginForm() {
       className={classes.container}
       onSubmit={onSubmit(doLogin)}
     >
+      <TextInput label="Username" withAsterisk {...getInputProps("username")} />
       <TextInput
-        label="Username or Email"
+        label="Password"
         withAsterisk
-        {...getInputProps("identifier")}
+        type="password"
+        {...getInputProps("password")}
       />
-      <TextInput label="Password" withAsterisk {...getInputProps("pass")} />
 
       <Button type="submit">Login</Button>
     </Box>
