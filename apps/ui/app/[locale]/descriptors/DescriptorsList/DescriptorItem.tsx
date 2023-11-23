@@ -106,8 +106,8 @@ function BaseDescriptorItem({ descriptor }: Props) {
           <LoadingBox />
         ) : (
           <>
-            <Title order={4}>Your session has expired.</Title>
-            <Title order={5}>Login again to see this descriptor</Title>
+            <Title order={4}>This run hasn&apos;t ended yet.</Title>
+            <Title order={5}>Wait some more, soon this will be filled.</Title>
           </>
         )}
       </Modal>

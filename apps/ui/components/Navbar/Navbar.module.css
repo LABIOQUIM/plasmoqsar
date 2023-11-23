@@ -57,38 +57,18 @@
   pointer-events: none;
 }
 
-.collections {
-  padding-left: calc(var(--mantine-spacing-md) - rem(6px));
-  padding-right: calc(var(--mantine-spacing-md) - rem(6px));
-  padding-bottom: var(--mantine-spacing-md);
-}
-
-.collectionsHeader {
-  padding-left: calc(var(--mantine-spacing-md) + rem(2px));
-  padding-right: var(--mantine-spacing-md);
-  margin-bottom: rem(5px);
-}
-
-.collectionLink {
-  display: flex;
-  padding: rem(8px) var(--mantine-spacing-xs);
-  text-decoration: none;
-  border-radius: var(--mantine-radius-sm);
-  font-size: var(--mantine-font-size-lg);
-  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
-  line-height: 1;
-  font-weight: 500;
-
-  &:hover {
-    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
-    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
-  }
-}
-
 .sectionLogout {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: var(--mantine-font-size-md);
+  padding: rem(8px) var(--mantine-spacing-xs);
+  border-radius: var(--mantine-radius-sm);
+  font-weight: 500;
   color: var(--mantine-color-red-5);
 
   &:hover {
+    background-color: light-dark(var(--mantine-color-red-1), var(--mantine-color-dark-6));
     color: var(--mantine-color-red-7);
   }
 }

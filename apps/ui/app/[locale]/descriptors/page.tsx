@@ -8,6 +8,7 @@ import { getSession } from "@/hooks/getSession";
 import { queryClient } from "@/lib/queryClient";
 
 import { getQSARDescriptors } from "./getQSARDescriptors";
+import TimeToRefetch from "./TimeToRefetch";
 
 const QSARFormModal = dynamic(() => import("./QSARFormModal"), {
   ssr: false,
@@ -32,6 +33,7 @@ export default async function Page() {
         <Group gap="lg">
           <Title>My Molecules</Title>
           <QSARFormModal />
+          <TimeToRefetch />
         </Group>
         <DescriptorsList />
       </PageLayout>

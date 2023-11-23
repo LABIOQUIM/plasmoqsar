@@ -15,33 +15,33 @@ export function SignInButton({ session, ...props }: Props): ReactElement {
     const userFullName = `${session.user.firstName} ${session.user.lastName}`;
 
     return (
-      <Link href="/account" className={classes.container}>
-        <UnstyledButton className={classes.user} {...props}>
-          <Group>
-            <Avatar radius="xl">
-              {userFullName
-                .trim()
-                .split(" ")
-                .map((w) => w[0].toUpperCase())}
-            </Avatar>
+      // <Link href="/account" className={classes.container}>
+      <UnstyledButton className={classes.user} {...props}>
+        <Group>
+          <Avatar radius="xl">
+            {userFullName
+              .trim()
+              .split(" ")
+              .map((w) => w[0].toUpperCase())}
+          </Avatar>
 
-            <div style={{ flex: 1 }}>
-              <Text size="sm" fw={500}>
-                {userFullName.trim()}
-              </Text>
+          <div style={{ flex: 1 }}>
+            <Text size="sm" fw={500}>
+              {userFullName.trim()}
+            </Text>
 
-              <Text c="dimmed" size="xs">
-                {session.user.email}
-              </Text>
-            </div>
+            <Text c="dimmed" size="xs">
+              {session.user.email}
+            </Text>
+          </div>
 
-            <IconChevronRight
-              style={{ width: rem(14), height: rem(14) }}
-              stroke={1.5}
-            />
-          </Group>
-        </UnstyledButton>
-      </Link>
+          {/* <IconChevronRight
+            style={{ width: rem(14), height: rem(14) }}
+            stroke={1.5}
+          /> */}
+        </Group>
+      </UnstyledButton>
+      // </Link>
     );
   }
 

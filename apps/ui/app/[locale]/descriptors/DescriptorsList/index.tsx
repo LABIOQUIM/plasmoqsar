@@ -1,7 +1,5 @@
 "use client";
-import { useEffect } from "react";
-import { Box, LoadingOverlay } from "@mantine/core";
-import { useDebouncedValue } from "@mantine/hooks";
+import { Box } from "@mantine/core";
 
 import { useQSARDescriptorsQuery } from "../useQSARDescriptors";
 
@@ -10,15 +8,7 @@ import { DescriptorItem } from "./DescriptorItem";
 import classes from "./DescriptorsList.module.css";
 
 export default function DescriptorsList() {
-  const { data, refetch, isLoading, isRefetching } = useQSARDescriptorsQuery();
-  const [debouncedIsRefetching] = useDebouncedValue(isRefetching, 500, {
-    leading: true,
-  });
-
-  useEffect(() => {
-    refetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { data } = useQSARDescriptorsQuery();
 
   if (!data) {
     return null;
@@ -30,13 +20,6 @@ export default function DescriptorsList() {
 
   return (
     <Box className={classes.container}>
-      <LoadingOverlay
-        visible={isLoading || debouncedIsRefetching}
-        zIndex={1000}
-        overlayProps={{ backgroundOpacity: 0.25, radius: "sm", blur: 2 }}
-        loaderProps={{ type: "dots" }}
-      />
-
       {data.flatMap((d) => (
         <DescriptorItem key={d.id} descriptor={d} />
       ))}

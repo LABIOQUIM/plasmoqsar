@@ -60,10 +60,11 @@ export function Navbar({ toggle, session }: Props): ReactElement {
           <div className={classes.mainLinks}>
             {...mainLinks}
             <UnstyledButton
-              className={classes.mainLink}
+              className={classes.sectionLogout}
+              color="red"
               onClick={() => invalidateSession()}
             >
-              <Group className={classes.sectionLogout} gap="md">
+              <Group gap="md">
                 <IconLogout />
                 <Text>Logout</Text>
               </Group>

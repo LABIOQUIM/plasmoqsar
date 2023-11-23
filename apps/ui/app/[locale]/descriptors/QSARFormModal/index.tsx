@@ -10,7 +10,7 @@ import classes from "./QSARFormModal.module.css";
 
 export default function QSARFormModal() {
   const [opened, { open, close }] = useDisclosure(false);
-  const { data, refetch } = useQSARDescriptorsQuery();
+  const { data } = useQSARDescriptorsQuery();
 
   let isDisabled = false;
 
@@ -51,7 +51,6 @@ export default function QSARFormModal() {
         >
           Submit new SDF
         </Button>
-        <Button onClick={() => refetch()}>Reload List</Button>
       </Group>
     </>
   );
