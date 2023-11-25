@@ -72,3 +72,13 @@
     color: var(--mantine-color-red-7);
   }
 }
+
+.makers {
+  margin-top: auto;
+  width: 100%;
+}
+
+.makerImage {
+  height: auto;
+  width: 100%;
+}

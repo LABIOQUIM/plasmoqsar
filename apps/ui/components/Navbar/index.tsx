@@ -2,10 +2,16 @@
 import { ReactElement } from "react";
 import { Badge, Group, Text, UnstyledButton } from "@mantine/core";
 import { Icon, IconCell, IconLogout } from "@tabler/icons-react";
+import Image from "next/image";
 import Link from "next/link";
 
+import EpiAmOBlackLogo from "@/assets/epiamo-black.png";
+import EpiAmOWhiteLogo from "@/assets/epiamo-white.png";
+import fiocruzROLogo from "@/assets/fiocruz-ro.png";
+import labioquimLogo from "@/assets/labioquim.png";
 import { SignInButton } from "@/components/SignInButton";
 import { invalidateSession } from "@/hooks/invalidateSession";
+import { useIsDarkTheme } from "@/hooks/useIsDarkTheme";
 
 import { RegisterButton } from "../RegisterButton";
 
@@ -28,6 +34,8 @@ interface Props {
 }
 
 export function Navbar({ toggle, session }: Props): ReactElement {
+  const isDark = useIsDarkTheme();
+
   const mainLinks = links.map((link) => (
     <UnstyledButton
       component={Link}
@@ -76,6 +84,16 @@ export function Navbar({ toggle, session }: Props): ReactElement {
           <RegisterButton />
         </div>
       )}
+
+      <div className={classes.makers}>
+        <Image alt="" className={classes.makerImage} src={labioquimLogo} />
+        <Image alt="" className={classes.makerImage} src={fiocruzROLogo} />
+        <Image
+          alt=""
+          className={classes.makerImage}
+          src={isDark ? EpiAmOWhiteLogo : EpiAmOBlackLogo}
+        />
+      </div>
     </>
   );
 }
