@@ -15,8 +15,16 @@ services:
       context: .
       dockerfile: apps/ui/Dockerfile
     image: labioquim/qsar-ui:prod
-    ports:
-      - "3000:3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.ui.loadbalancer.server.port=3000"
+      - "traefik.http.routers.ui.rule=Host(`${UI_URL}`)"
+      - "traefik.http.routers.ui.service=ui"
+      - "traefik.http.routers.ui.tls=true"
+      - "traefik.http.routers.ui.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.ui.tls.domains[0].main=${UI_URL}"
+      - "traefik.http.routers.ui.tls.domains[0].sans=*.${UI_URL}"
+      - "traefik.http.routers.ui.entryPoints=websecure"
     depends_on:
       - api
       - database
@@ -29,8 +37,6 @@ services:
     environment:
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: "qsar"
-    ports:
-      - "5432:5432"
     volumes:
       - database:/var/lib/postgresql/data
 
@@ -39,7 +45,50 @@ services:
     volumes:
       - redis:/data
 
+  traefik:
+    image: traefik
+    command:
+      - "--log.level=DEBUG"
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedByDefault=false"
+      - "--providers.docker.watch=true"
+
+      - "--certificatesresolvers.letsencrypt.acme.email=ivoprovensi1@gmail.com"  # replace with your email
+      - "--certificatesresolvers.letsencrypt.acme.storage=acme/acme.json"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+
+      - "--entrypoints.websecure.address=:443"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entryPoints.web.http.redirections.entrypoint.permanent=true"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`${TRAEFIK_URL}`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.middlewares=traefik-auth"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.traefik.tls.domains[0].main=${UI_URL}"
+      - "traefik.http.routers.traefik.tls.domains[0].sans=*.${TRAEFIK_URL}"
+      - "traefik.http.routers.traefik.entryPoints=websecure"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_BASIC_AUTH}"
+      - "traefik.http.middlewares.traefik-auth.basicauth.removeheader=true"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - traefik_acme:/acme
+      - traefik_logs:/logs
+    ports:
+      - 80:80
+      - 443:443
+
 volumes:
+  traefik_acme:
+    driver: nfsvol
+  traefik_logs:
+    driver: nfsvol
   database:
     driver: nfsvol
   files:
