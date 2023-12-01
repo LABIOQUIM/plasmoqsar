@@ -41,7 +41,7 @@ COPY package.json .yarnrc.yml yarn.lock .env ./
 COPY --from=builder /app/apps/api/dist ./apps/api/dist
 COPY --from=builder /app/apps/api/.env ./apps/api.env
 COPY apps/api/package.json ./apps/api
-COPY packages ./packages
+COPY --from=builder /app/packages ./packages
 
 EXPOSE 3000
 
