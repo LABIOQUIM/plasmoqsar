@@ -38,8 +38,8 @@ WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json .yarnrc.yml yarn.lock .env ./
-COPY apps/api/dist ./apps/api/dist
-COPY apps/api/.env ./apps/api.env
+COPY --from=builder apps/api/dist ./apps/api/dist
+COPY --from=builder apps/api/.env ./apps/api.env
 COPY apps/api/package.json ./apps/api
 COPY packages ./packages
 
