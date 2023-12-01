@@ -23,7 +23,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json .yarnrc.yml yarn.lock .env ./
 COPY apps/ui ./apps/ui
-COPY packages ./packages
+COPY --from=deps /app/packages ./packages
 
 RUN yarn workspace ui build
 
