@@ -23,7 +23,6 @@ services:
       - "traefik.http.routers.ui.tls=true"
       - "traefik.http.routers.ui.tls.certresolver=letsencrypt"
       - "traefik.http.routers.ui.tls.domains[0].main=${UI_URL}"
-      - "traefik.http.routers.ui.tls.domains[0].sans=*.${UI_URL}"
       - "traefik.http.routers.ui.entryPoints=websecure"
     depends_on:
       - api
