@@ -61,7 +61,7 @@ services:
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
 
       - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.analytics.address:8000"
+      - "--entrypoints.analytics.address=:8000"
       - "--entryPoints.web.address=:80"
       - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
       - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
