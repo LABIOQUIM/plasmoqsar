@@ -11,7 +11,6 @@ This repository is a Monorepo, meaning all necessary code is here. You'll still 
 
 #### Production
 If you want to simply instantiate and use, this is probably what you want.
-1. Make sure all the above mentioned steps have been completed.
-1. Open up a terminal, navigate to the folder containing this repo and run the command `docker compose -f docker-compose.prod.yml up -d --build`
+1. Rewriting...
 
 If everything went okay, you should be able to go to [localhost:3000](http://localhost:3000), register a new user and start using the app.

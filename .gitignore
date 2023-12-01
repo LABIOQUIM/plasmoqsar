@@ -3,6 +3,8 @@ files
 node_modules
 report.txt
 .env
+.plausible.env
+clickhouse
 
 .yarn/*
 !.yarn/patches
