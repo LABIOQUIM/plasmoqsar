@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json .yarnrc.yml yarn.lock .env ./
 COPY apps/api ./apps/api
-COPY packages ./packages
+COPY --from=deps /app/packages ./packages
 
 RUN yarn workspace api build
 
@@ -38,8 +38,8 @@ WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json .yarnrc.yml yarn.lock .env ./
-COPY --from=builder apps/api/dist ./apps/api/dist
-COPY --from=builder apps/api/.env ./apps/api.env
+COPY --from=builder /app/apps/api/dist ./apps/api/dist
+COPY --from=builder /app/apps/api/.env ./apps/api.env
 COPY apps/api/package.json ./apps/api
 COPY packages ./packages
 
