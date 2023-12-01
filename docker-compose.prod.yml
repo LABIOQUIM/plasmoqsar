@@ -50,7 +50,7 @@ services:
     image: traefik
     command:
       - "--log.level=DEBUG"
-      - "--api.dashboard=true"
+      - "--api.dashboard=false"
       - "--providers.docker=true"
       - "--providers.docker.exposedByDefault=false"
       - "--providers.docker.watch=true"
@@ -61,22 +61,11 @@ services:
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
 
       - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.analytics.address:8000"
       - "--entryPoints.web.address=:80"
       - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
       - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
       - "--entryPoints.web.http.redirections.entrypoint.permanent=true"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.traefik.rule=Host(`${TRAEFIK_URL}`)"
-      - "traefik.http.routers.traefik.service=api@internal"
-      - "traefik.http.routers.traefik.middlewares=traefik-auth"
-      - "traefik.http.routers.traefik.tls=true"
-      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.traefik.tls.domains[0].main=${UI_URL}"
-      - "traefik.http.routers.traefik.tls.domains[0].sans=*.${TRAEFIK_URL}"
-      - "traefik.http.routers.traefik.entryPoints=websecure"
-      - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_BASIC_AUTH}"
-      - "traefik.http.middlewares.traefik-auth.basicauth.removeheader=true"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - traefik_acme:/acme
@@ -84,6 +73,7 @@ services:
     ports:
       - 80:80
       - 443:443
+      - 8000:8000
 
   # ANALYTICS
   plausible_db:
@@ -113,14 +103,9 @@ services:
     command: sh -c "sleep 10 && /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.services.plausible.loadbalancer.server.port=8000"
-      - "traefik.http.routers.plausible.rule=Host(`${PLAUSIBLE_URL}`)"
-      - "traefik.http.routers.plausible.service=plausible"
-      - "traefik.http.routers.plausible.tls=true"
-      - "traefik.http.routers.plausible.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.plausible.tls.domains[0].main=${UI_URL}"
-      - "traefik.http.routers.plausible.tls.domains[0].sans=*.${PLAUSIBLE_URL}"
-      - "traefik.http.routers.plausible.entryPoints=websecure"
+      - "traefik.analytics.services.plausible.loadbalancer.server.port=8000"
+      - "traefik.analytics.routers.plausible.rule=Host(`${PLAUSIBLE_URL}`)"
+      - "traefik.analytics.routers.plausible.service=plausible"
     depends_on:
       - plausible_db
       - plausible_events_db
