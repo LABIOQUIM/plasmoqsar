@@ -7,6 +7,7 @@ services:
       context: .
       dockerfile: apps/api/Dockerfile
     env_file: .env
+    restart: always
     volumes:
       - files:/files
 
@@ -15,6 +16,7 @@ services:
       context: .
       dockerfile: apps/ui/Dockerfile
     image: labioquim/qsar-ui:prod
+    restart: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.ui.loadbalancer.server.port=3000"
@@ -36,6 +38,7 @@ services:
     environment:
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: "qsar"
+      restart: always
     ports:
      - "5432:5432"
     volumes:
@@ -43,12 +46,14 @@ services:
 
   redis:
     image: redis:alpine
+    restart: always
     volumes:
       - redis:/data
 
   # INFRA
   traefik:
     image: traefik
+    restart: always
     command:
       - "--log.level=DEBUG"
       - "--api.dashboard=false"

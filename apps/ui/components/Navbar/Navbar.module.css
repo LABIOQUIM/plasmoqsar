@@ -74,11 +74,20 @@
 }
 
 .makers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-sm);
   margin-top: auto;
+  margin-bottom: var(--mantine-spacing-md);
   width: 100%;
 }
 
-.makerImage {
-  height: auto;
-  width: 100%;
+.makerImage128px {
+  height: 128px;
+  width: auto;
+}
+
+.makerImage96px {
+  height: 96px;
+  width: auto;
 }

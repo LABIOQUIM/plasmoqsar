@@ -10,7 +10,6 @@ interface Props extends HTMLAttributes<HTMLButtonElement> {
 }
 
 export function SignInButton({ session, ...props }: Props): ReactElement {
-  console.log(session);
   if (session) {
     const userFullName = `${session.user.firstName} ${session.user.lastName}`;
 
@@ -47,7 +46,7 @@ export function SignInButton({ session, ...props }: Props): ReactElement {
 
   return (
     <Link href="/login" className={classes.container}>
-      <UnstyledButton className={classes.user} {...props}>
+      <UnstyledButton className={classes.signin} {...props}>
         <Group>
           <Avatar radius="xl" />
 
@@ -57,7 +56,7 @@ export function SignInButton({ session, ...props }: Props): ReactElement {
             </Text>
 
             <Text c="dimmed" size="xs">
-              Thou must authenticate to use dis
+              You must be registered and logged in to use the system.
             </Text>
           </div>
 
