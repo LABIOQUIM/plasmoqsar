@@ -12,18 +12,24 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v2
 
-      - name: Setup Nodejs
+      - name: Install Node
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: "yarn"
 
-      - name: Enable Corepack
-        run: |
-          corepack enable
+      - name: Install Yarn
+        run: corepack enable |
+          corepack prepare yarn@3.6.4 --activate
+
+      # Yarn dependencies cannot be cached until yarn is installed
+      # WORKAROUND: https://github.com/actions/setup-node/issues/531
+      - name: Extract Cached Dependencies
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
 
       - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn --immutable
 
       - name: Set Git user to Actions Bot
         run: |
