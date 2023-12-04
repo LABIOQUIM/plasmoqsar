@@ -6,11 +6,18 @@
     "apps/*",
     "packages/*"
   ],
+  "scripts": {
+    "prepare": "husky install",
+    "commitlint": "commitlint --edit"
+  },
   "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
     "@ivopr/eslint-config": "^1.1.0",
     "@release-it/bumper": "^6.0.1",
     "@release-it/conventional-changelog": "^8.0.1",
     "eslint": "^8.53.0",
+    "husky": "^8.0.3",
     "release-it": "^17.0.0"
   },
   "version": "0.0.1"
