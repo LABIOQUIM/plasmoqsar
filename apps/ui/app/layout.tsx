@@ -3,10 +3,11 @@ import PlausibleProvider from "next-plausible";
 
 export const metadata = {
   title: {
-    default: "QSAR",
-    template: "%s | QSAR",
+    default: "PlasmoQSAR",
+    template: "%s | PlasmoQSAR",
   },
-  description: "I am using Mantine with Next.js!",
+  description:
+    "Calculation of pEC50 and EC50% of anti-malaria agents - QSAR with machine learning",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {

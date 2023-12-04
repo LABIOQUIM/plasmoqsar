@@ -26,7 +26,7 @@ export function Logo(): ReactElement {
           },
         })}
       >
-        QSAR
+        PlasmoQSAR
       </Title>
     </Box>
   );

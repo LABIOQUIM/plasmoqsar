@@ -3,11 +3,6 @@
     "requireBranch": "main",
     "commitMessage": "chore: release v${version}"
   },
-  "hooks": {
-    "before:init": [
-      "git pull"
-    ]
-  },
   "github": {
     "release": true
   },
