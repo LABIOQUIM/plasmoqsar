@@ -5,8 +5,7 @@
   },
   "hooks": {
     "before:init": [
-      "git pull",
-      "yarn lint"
+      "git pull"
     ]
   },
   "github": {
