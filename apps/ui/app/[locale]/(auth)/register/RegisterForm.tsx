@@ -40,12 +40,26 @@ export default function RegisterForm() {
   async function doRegister(data: RegisterFormInputs) {
     setIsLoading(true);
     registerUser(data)
-      .then(() => {
-        notifications.show({
-          color: "green",
-          message: "Your account has been created.",
-        });
-        router.push("/descriptors");
+      .then((res) => {
+        if (res === "existing-user") {
+          notifications.show({
+            color: "red",
+            message:
+              "There's a user with this username or email already registered.",
+          });
+        } else if (res === "unknown-error") {
+          notifications.show({
+            color: "red",
+            message:
+              "Oops! Something went wrong. Please report it to the administrators.",
+          });
+        } else {
+          notifications.show({
+            color: "green",
+            message: "Your account has been created.",
+          });
+          router.push("/descriptors");
+        }
       })
       .finally(() => {
         setIsLoading(false);

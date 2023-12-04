@@ -42,7 +42,7 @@ export default function LoginForm() {
       } else if (res === "unknown-error") {
         notifications.show({
           color: "red",
-          message: "Something went wrong.",
+          message: "Something went wrong. Please report to the administrators.",
         });
       } else {
         router.replace("/descriptors");

@@ -24,9 +24,7 @@ export async function registerUser(data: RegisterFormInputs) {
     });
     const authRequest = auth.handleRequest("POST", context);
     authRequest.setSession(session);
-  } catch (e) {
-    console.log(e);
-    // @ts-expect-error
+  } catch (e: any) {
     if (e && e.code && e.code === "P2002") {
       return "existing-user";
     }
