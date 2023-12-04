@@ -12,5 +12,6 @@
     "@release-it/conventional-changelog": "^8.0.1",
     "eslint": "^8.53.0",
     "release-it": "^17.0.0"
-  }
+  },
+  "version": "0.0.1"
 }
