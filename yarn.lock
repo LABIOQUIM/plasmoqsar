@@ -841,9 +841,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ivopr/eslint-config@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@ivopr/eslint-config@npm:1.1.0"
+"@ivopr/eslint-config@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@ivopr/eslint-config@npm:1.2.0"
   dependencies:
     "@typescript-eslint/eslint-plugin": ^5.60.1
     "@typescript-eslint/parser": ^5.60.1
@@ -859,14 +859,13 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-simple-import-sort: ^10.0.0
     prettier: ^2.8.8
-    prettier-plugin-tailwindcss: ^0.4.1
   peerDependencies:
     eslint: ^8.8.0
     typescript: ^5.1.6
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 3b0fc61137a639c4d3db76b91e4de2f104203506fe69d88e243cd68e5e8e104fafb3e89d5fecf66959d0310a55f97003a0ed91c2fe448f0cb519932eded11491
+  checksum: 8a1b24b9d6d5a5d73e338f31436459d031402fe02f1987296b3b8d02206d376ecc705aeb153162ccb98caf44e4a8c6d0e51b073625f46bddc67150f81c253700
   languageName: node
   linkType: hard
 
@@ -990,107 +989,107 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/core@npm:^7.2.1":
-  version: 7.2.1
-  resolution: "@mantine/core@npm:7.2.1"
+"@mantine/core@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@mantine/core@npm:7.3.0"
   dependencies:
     "@floating-ui/react": ^0.24.8
     clsx: 2.0.0
-    react-number-format: ^5.2.2
-    react-remove-scroll: ^2.5.6
+    react-number-format: ^5.3.1
+    react-remove-scroll: ^2.5.7
     react-textarea-autosize: 8.5.3
     type-fest: ^3.13.1
   peerDependencies:
-    "@mantine/hooks": 7.2.1
+    "@mantine/hooks": 7.3.0
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 2f56ffb9e9b82907d3c8c1e4f404ecf4df762f621d2b8333fa56937d1201a236d82fb64367af7db2247b2190f777cb53102bec07e0327757e0b5d34e7b8fbef4
+  checksum: bb0cb6f29ff2888e74a19cf3e4a3719028482d36b66763abac4db1b4e62dbaaf6a52ec176c6b4ca9fa9b9ff9239c67d9ff3c614e899c5e58a70ad9057d6c8123
   languageName: node
   linkType: hard
 
-"@mantine/dates@npm:^7.2.1":
-  version: 7.2.1
-  resolution: "@mantine/dates@npm:7.2.1"
+"@mantine/dates@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@mantine/dates@npm:7.3.0"
   dependencies:
     clsx: 2.0.0
   peerDependencies:
-    "@mantine/core": 7.2.1
-    "@mantine/hooks": 7.2.1
-    dayjs: ^1.10.5
+    "@mantine/core": 7.3.0
+    "@mantine/hooks": 7.3.0
+    dayjs: ">=1.0.0"
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 4c919b56fdb54ec8be4702903af1b69b109e7eab6be980c2207f458bcce46b0280ab26ca1958210f9a868b3f19dfa7782a4916009915015dffd86e560c3212ac
+  checksum: e599fc54e98ba2def90c9e1f764ef663a9a6c49892d430021749cb4bec0d13247484eda896f1f2f66e232a99b33ad13f6499c72084a9fc304fca22c2a730522a
   languageName: node
   linkType: hard
 
-"@mantine/dropzone@npm:^7.2.1":
-  version: 7.2.1
-  resolution: "@mantine/dropzone@npm:7.2.1"
+"@mantine/dropzone@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@mantine/dropzone@npm:7.3.0"
   dependencies:
     react-dropzone-esm: 15.0.1
   peerDependencies:
-    "@mantine/core": 7.2.1
-    "@mantine/hooks": 7.2.1
+    "@mantine/core": 7.3.0
+    "@mantine/hooks": 7.3.0
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: ba5ffca519d3aea8620385fd611c2197f93861807fee319cc81cd5a4d9a90f21f4a6d3f4e8ed3eee0950cfacd52cc133c3572ce9151c86500c311f66d7261a48
+  checksum: 35f73ea3288921ad52402a01cbae8d60f1f75cc0f138e655a365ad7ce618faa62b7c5e0fb6f7e6163d16421665a5e59bb2c071382d925b5e4e4fdc16758882b1
   languageName: node
   linkType: hard
 
-"@mantine/form@npm:^7.2.1":
-  version: 7.2.1
-  resolution: "@mantine/form@npm:7.2.1"
+"@mantine/form@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@mantine/form@npm:7.3.0"
   dependencies:
     fast-deep-equal: ^3.1.3
-    klona: ^2.0.5
+    klona: ^2.0.6
   peerDependencies:
     react: ^18.2.0
-  checksum: cc7eb9ccba6a4ec81491a727dbee6ed9b7a62ffd6760e0c41a5a3f4992a2d218e6019a9abcfe3aff9c7f6463e3910ee20182b640dcece36733b2042d697ef57e
+  checksum: 5fe2dc7281fa6eb08fef584a37afac4d50d22ce075d0c8030590bcf6c42eb0109537df055295c7e01217b9fd3cf69bb82d68ebdcb8465940daf555937c33e831
   languageName: node
   linkType: hard
 
-"@mantine/hooks@npm:^7.2.1":
-  version: 7.2.1
-  resolution: "@mantine/hooks@npm:7.2.1"
+"@mantine/hooks@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@mantine/hooks@npm:7.3.0"
   peerDependencies:
     react: ^18.2.0
-  checksum: 8dd61f29eb8f2b51c11f595925493a1bfb54b7d650aee83001f26ece1f87e09823e8c57be2cc25f0625bc962e5890e82231dda8d12154407cef5e19e273b7584
+  checksum: b63f5bc82735d78293be31b9a72f715d35c9972465183326e542a48adbdf726d28ffeb830191f250b1f6b06f7d0176f12cb57963399393e69e0b0f2f3ace5423
   languageName: node
   linkType: hard
 
-"@mantine/modals@npm:^7.2.1":
-  version: 7.2.1
-  resolution: "@mantine/modals@npm:7.2.1"
+"@mantine/modals@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@mantine/modals@npm:7.3.0"
   peerDependencies:
-    "@mantine/core": 7.2.1
-    "@mantine/hooks": 7.2.1
+    "@mantine/core": 7.3.0
+    "@mantine/hooks": 7.3.0
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 99ea539c04c03dee2bbf36a026862272a8fcb3db440f1bc5d68492cfffa81c477ffc65d0ab373cc98d0f3934f89f4860ab5499bcdc8ace152f894e7b265d1d48
+  checksum: dccc0d99248804c647c00b2acaef314190631911b7cceab7af68b8976cb97c0783a54646b0f24e95485772af3ece3a25cd745d91db8aa31266f21f6b16e5b653
   languageName: node
   linkType: hard
 
-"@mantine/notifications@npm:^7.2.1":
-  version: 7.2.1
-  resolution: "@mantine/notifications@npm:7.2.1"
+"@mantine/notifications@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@mantine/notifications@npm:7.3.0"
   dependencies:
-    "@mantine/store": 7.2.1
+    "@mantine/store": 7.3.0
     react-transition-group: 4.4.5
   peerDependencies:
-    "@mantine/core": 7.2.1
-    "@mantine/hooks": 7.2.1
+    "@mantine/core": 7.3.0
+    "@mantine/hooks": 7.3.0
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: f81a7dc078cb48a760b92ead990d8cfdf6f7b72d4a15c910689476127f401fa133703649e35e4672b5a68cf3e665d9288adee0bd229403f32ac1f0c208b1906f
+  checksum: 7e9201cbddd8ea5ce4f36d2d5e59659295b3799d9e4fb3f1c679039f18aa3248de4c169f33d8c60f155925981e23ea6ce9b4e6e6e83ab3c8e86076edf9589a6e
   languageName: node
   linkType: hard
 
-"@mantine/store@npm:7.2.1":
-  version: 7.2.1
-  resolution: "@mantine/store@npm:7.2.1"
+"@mantine/store@npm:7.3.0":
+  version: 7.3.0
+  resolution: "@mantine/store@npm:7.3.0"
   peerDependencies:
     react: ^18.2.0
-  checksum: 84c2bffca92e87364eccb1256eea56b222ed3eb76d7a0c7e85a42c01ef80cd69cac30269dc5644638734da469efc4ab35fae292d409777feefc372d94be39c3b
+  checksum: 435d28dd19e886f2096ae89590d067a9d075c42deba7b86839c19241bc76904a1d2aeb8838d4ac6c8594fed8db5a62cb59f75ca39abda5b4164177dd534446de
   languageName: node
   linkType: hard
 
@@ -7637,7 +7636,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"klona@npm:^2.0.5":
+"klona@npm:^2.0.6":
   version: 2.0.6
   resolution: "klona@npm:2.0.6"
   checksum: ac9ee3732e42b96feb67faae4d27cf49494e8a3bf3fa7115ce242fe04786788e0aff4741a07a45a2462e2079aa983d73d38519c85d65b70ef11447bbc3c58ce7
@@ -9466,61 +9465,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-tailwindcss@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "prettier-plugin-tailwindcss@npm:0.4.1"
-  peerDependencies:
-    "@ianvs/prettier-plugin-sort-imports": "*"
-    "@prettier/plugin-pug": "*"
-    "@shopify/prettier-plugin-liquid": "*"
-    "@shufo/prettier-plugin-blade": "*"
-    "@trivago/prettier-plugin-sort-imports": "*"
-    prettier: ^2.2 || ^3.0
-    prettier-plugin-astro: "*"
-    prettier-plugin-css-order: "*"
-    prettier-plugin-import-sort: "*"
-    prettier-plugin-jsdoc: "*"
-    prettier-plugin-marko: "*"
-    prettier-plugin-organize-attributes: "*"
-    prettier-plugin-organize-imports: "*"
-    prettier-plugin-style-order: "*"
-    prettier-plugin-svelte: "*"
-    prettier-plugin-twig-melody: "*"
-  peerDependenciesMeta:
-    "@ianvs/prettier-plugin-sort-imports":
-      optional: true
-    "@prettier/plugin-pug":
-      optional: true
-    "@shopify/prettier-plugin-liquid":
-      optional: true
-    "@shufo/prettier-plugin-blade":
-      optional: true
-    "@trivago/prettier-plugin-sort-imports":
-      optional: true
-    prettier-plugin-astro:
-      optional: true
-    prettier-plugin-css-order:
-      optional: true
-    prettier-plugin-import-sort:
-      optional: true
-    prettier-plugin-jsdoc:
-      optional: true
-    prettier-plugin-marko:
-      optional: true
-    prettier-plugin-organize-attributes:
-      optional: true
-    prettier-plugin-organize-imports:
-      optional: true
-    prettier-plugin-style-order:
-      optional: true
-    prettier-plugin-svelte:
-      optional: true
-    prettier-plugin-twig-melody:
-      optional: true
-  checksum: 9bdf3b7c270cc544f6bc38bbb869d3a97afc93de5005eee7272a36f374488731349c9362d2bbe4c83bd2a14b8a7c96cd25b9b682d1bea6dccc5bf08b2d02096c
-  languageName: node
-  linkType: hard
-
 "prettier@npm:^2.8.8":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8"
@@ -9696,7 +9640,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^17.7.1
     "@commitlint/config-conventional": ^17.7.0
-    "@ivopr/eslint-config": ^1.1.0
+    "@ivopr/eslint-config": ^1.2.0
     "@release-it/bumper": ^6.0.1
     "@release-it/conventional-changelog": ^8.0.1
     eslint: ^8.53.0
@@ -9836,7 +9780,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-number-format@npm:^5.2.2":
+"react-number-format@npm:^5.3.1":
   version: 5.3.1
   resolution: "react-number-format@npm:5.3.1"
   dependencies:
@@ -9864,7 +9808,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-remove-scroll@npm:^2.5.6":
+"react-remove-scroll@npm:^2.5.7":
   version: 2.5.7
   resolution: "react-remove-scroll@npm:2.5.7"
   dependencies:
@@ -11840,13 +11784,13 @@ __metadata:
   resolution: "ui@workspace:apps/ui"
   dependencies:
     "@lucia-auth/adapter-prisma": ^3.0.2
-    "@mantine/core": ^7.2.1
-    "@mantine/dates": ^7.2.1
-    "@mantine/dropzone": ^7.2.1
-    "@mantine/form": ^7.2.1
-    "@mantine/hooks": ^7.2.1
-    "@mantine/modals": ^7.2.1
-    "@mantine/notifications": ^7.2.1
+    "@mantine/core": ^7.3.0
+    "@mantine/dates": ^7.3.0
+    "@mantine/dropzone": ^7.3.0
+    "@mantine/form": ^7.3.0
+    "@mantine/hooks": ^7.3.0
+    "@mantine/modals": ^7.3.0
+    "@mantine/notifications": ^7.3.0
     "@prisma/nextjs-monorepo-workaround-plugin": ^5.5.2
     "@tabler/icons-react": ^2.40.0
     "@tanstack/react-query": ^5.8.4

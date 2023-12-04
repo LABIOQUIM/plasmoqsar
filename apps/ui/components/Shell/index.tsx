@@ -11,6 +11,10 @@ import { LoadingBox } from "@/components/LoadingBox";
 import { Logo } from "@/components/Logo";
 import { queryClient } from "@/lib/queryClient";
 
+import { Footer } from "./Footer";
+
+import classes from "./Shell.module.css";
+
 const Navbar = dynamic(
   () => import("@/components/Navbar").then((mod) => mod.Navbar),
   {
@@ -36,6 +40,10 @@ export function Shell({ session, children }: PropsWithChildren<Props>) {
   return (
     <QueryClientProvider client={queryClient}>
       <AppShell
+        footer={{
+          height: 152,
+          offset: false,
+        }}
         header={{ height: 60 }}
         navbar={{
           width: 300,
@@ -76,6 +84,9 @@ export function Shell({ session, children }: PropsWithChildren<Props>) {
         >
           {children}
         </AppShell.Main>
+        <AppShell.Footer className={classes.footer}>
+          <Footer />
+        </AppShell.Footer>
       </AppShell>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

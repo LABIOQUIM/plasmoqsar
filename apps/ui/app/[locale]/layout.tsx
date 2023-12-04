@@ -1,3 +1,9 @@
+// eslint-disable-next-line simple-import-sort/imports
+import "@mantine/core/styles.layer.css";
+import "@mantine/dates/styles.layer.css";
+import "@mantine/dropzone/styles.layer.css";
+import "@mantine/notifications/styles.layer.css";
+
 import { PropsWithChildren } from "react";
 import { MantineProvider } from "@mantine/core";
 import { DatesProvider } from "@mantine/dates";
@@ -6,11 +12,6 @@ import { Notifications } from "@mantine/notifications";
 import { Shell } from "@/components/Shell";
 import { getSession } from "@/hooks/getSession";
 import { theme } from "@/theme";
-
-import "@mantine/core/styles.layer.css";
-import "@mantine/dates/styles.layer.css";
-import "@mantine/dropzone/styles.layer.css";
-import "@mantine/notifications/styles.layer.css";
 
 // const ColorSchemeScript = dynamic(
 //   () => import("@mantine/core").then((mod) => mod.ColorSchemeScript),
