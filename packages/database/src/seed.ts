@@ -6,8 +6,8 @@ const DEFAULT_USERS: Prisma.UserCreateInput[] = [
   {
     email: 'ivoprovensi1@gmail.com',
     firstName: 'ivo',
-    password: "123",
-    username: 'ivopr'
+    username: 'ivopr',
+    id: "12345aqw"
   },
 ];
 
