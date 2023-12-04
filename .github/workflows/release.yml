@@ -27,6 +27,6 @@ jobs:
           git config --local user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
       - name: Run Release
-        run: yarn release --ci
+        run: yarn release-it --ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
