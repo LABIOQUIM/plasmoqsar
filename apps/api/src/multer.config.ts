@@ -3,6 +3,9 @@ import { diskStorage } from "multer";
 import * as path from "path";
 
 const multerConfig = {
+  limits: {
+    fileSize: 8000000, // Compliant: 8MB
+  },
   storage: diskStorage({
     destination: "/files",
     filename: (req, file, cb) => {
