@@ -1,5 +1,6 @@
 "use server";
-import * as context from "next/headers";
+import axios from "axios";
+import { prisma } from "database";
 
 import { auth } from "@/lib/lucia";
 
@@ -18,12 +19,29 @@ export async function registerUser(data: RegisterFormInputs) {
         username: data.username,
       },
     });
-    const session = await auth.createSession({
-      userId: user.userId,
-      attributes: {},
+
+    const userActivation = await prisma.userActivation.create({
+      data: {
+        user: {
+          connect: {
+            id: user.userId,
+          },
+        },
+      },
     });
-    const authRequest = auth.handleRequest("POST", context);
-    authRequest.setSession(session);
+
+    await axios.post("http://mailer:3000/send-email", {
+      from: `PlasmoQSAR <${process.env.SMTP_USER}>`,
+      to: data.email,
+      subject: "Your registration at PlasmoQSAR",
+      template: "activation.hbs",
+      context: {
+        name: data.firstName,
+        activationURL: `${process.env.APP_URL}/activate/${userActivation.id}`,
+      },
+    });
+
+    // SEND MAIL HERE
   } catch (e: any) {
     if (e && e.code && e.code === "P2002") {
       return "existing-user";

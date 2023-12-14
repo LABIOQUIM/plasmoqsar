@@ -1,4 +1,5 @@
 "use server";
+import { prisma } from "database";
 import { LuciaError } from "lucia";
 import * as context from "next/headers";
 
@@ -6,6 +7,24 @@ import { auth } from "@/lib/lucia";
 
 export async function signIn(username: string, password: string) {
   try {
+    const user = await prisma.user.findFirst({
+      where: {
+        username,
+      },
+    });
+
+    if (!user) {
+      return "invalid-credentials";
+    }
+
+    if (user.status === "AWAITING_ACTIVATION") {
+      return "awaiting-activation";
+    }
+
+    if (user.status === "INACTIVE") {
+      return "inactive";
+    }
+
     const key = await auth.useKey("username", username.toLowerCase(), password);
     const session = await auth.createSession({
       userId: key.userId,

@@ -17,20 +17,46 @@ enum DESCRIPTOR_STATUS {
   SUCCESS
 }
 
+enum USER_STATUS {
+  ACTIVE
+  AWAITING_ACTIVATION
+  INACTIVE
+}
+
+enum USER_ROLE {
+  USER
+  ADMINISTRATOR
+}
+
 model User {
-  id        String   @id @unique
-  firstName String   @map("first_name")
-  lastName  String?  @map("last_name")
-  email     String   @unique
-  username  String   @unique
+  id        String      @id @unique
+  firstName String      @map("first_name")
+  lastName  String?     @map("last_name")
+  email     String      @unique
+  username  String      @unique
+  status    USER_STATUS @default(AWAITING_ACTIVATION)
+  role      USER_ROLE   @default(USER)
+  createdAt DateTime    @default(now()) @map("created_at")
+  updatedAt DateTime    @updatedAt @map("updated_at")
+
+  authSession    Session[]
+  descriptors    Descriptor[]
+  key            Key[]
+  userActivation UserActivation?
+
+  @@map("users")
+}
+
+model UserActivation {
+  id        String   @id @unique @default(uuid())
+  userId    String   @unique @map("user_id")
+  used      Boolean  @default(false)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  auth_session Session[]
-  descriptors  Descriptor[]
-  key          Key[]
+  user User @relation(fields: [userId], references: [id])
 
-  @@map("users")
+  @@map("user_activations")
 }
 
 model Session {
@@ -59,10 +85,10 @@ model Key {
 model Descriptor {
   id        String            @id @default(uuid())
   sdfName   String            @map("sdf_name")
-  yValues   String[]          @map("y_values")
+  results   String[]
   status    DESCRIPTOR_STATUS @default(AWAITING)
   error     String?
-  userId    String
+  userId    String            @map("user_id")
   createdAt DateTime          @default(now())
   updatedAt DateTime          @updatedAt
 

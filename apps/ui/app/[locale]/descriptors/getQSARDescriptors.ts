@@ -1,5 +1,7 @@
 "use server";
 
+import { Descriptor } from "database";
+
 import { getSession } from "@/hooks/getSession";
 import { api } from "@/lib/api";
 

@@ -4,11 +4,10 @@
   flex-direction: column;
   gap: var(--mantine-spacing-sm);
   padding: var(--mantine-spacing-xs);
-  min-height: 152px;
+  padding-top: var(--mantine-spacing-lg);
   height: auto;
 
   @mixin larger-than $mantine-breakpoint-lg {
     flex-direction: row;
-    padding-left: 315px;
   } 
 }

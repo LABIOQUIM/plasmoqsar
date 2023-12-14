@@ -1,6 +1,6 @@
 import { prisma } from ".";
 
-import type { User, Prisma } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 
 const DEFAULT_USERS: Prisma.UserCreateInput[] = [
   {

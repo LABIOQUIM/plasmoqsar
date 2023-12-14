@@ -75,7 +75,7 @@ export class DescriptorsConsumer {
 
       const isolatedDescriptorsContent: string[] =
         isolatedDescriptorsRaw.split(/\r?\n/);
-      const descriptorsResult: string[] = [];
+      const descriptorsResults: string[] = [];
 
       function isValidNumber(value: string): boolean {
         return /^[-+]?(\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?$/.test(value);
@@ -94,7 +94,7 @@ export class DescriptorsConsumer {
         const valueB: string = lineArr[2];
         const valueC: string = lineArr[3];
 
-        let valueY: number;
+        let pec50: number;
 
         if (
           isValidNumber(valueA) &&
@@ -105,7 +105,7 @@ export class DescriptorsConsumer {
           const B: number = parseFloat(valueB);
           const C: number = parseFloat(valueC);
 
-          valueY =
+          pec50 =
             55.8464453262526 * A +
             460.629869289697 * B +
             1576.39573192884 * C -
@@ -143,8 +143,10 @@ export class DescriptorsConsumer {
             743.63518669;
         }
 
-        descriptorsResult.push(
-          `${Nmbr}\t${valueA}\t${valueB}\t${valueC}\t${valueY}`
+        const ec50 = 10 ** (-pec50 + 6);
+
+        descriptorsResults.push(
+          `${Nmbr}\t${valueA}\t${valueB}\t${valueC}\t${pec50}\t${ec50}`
         );
       }
 
@@ -154,7 +156,7 @@ export class DescriptorsConsumer {
         },
         data: {
           status: "SUCCESS",
-          yValues: descriptorsResult,
+          results: descriptorsResults,
         },
       });
     } catch {

@@ -26,10 +26,19 @@ services:
       - "3000:3000"
     depends_on:
       - api
+      - mailer
     volumes:
       - ./:/app
       - /app/node_modules
       - /app/apps/ui/.next
+  
+  mailer:
+    image: murilofuza/simple-mail:0.0.6
+    env_file: .env
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./emails:/templates
 
   studio:
     build:

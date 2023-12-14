@@ -2,6 +2,7 @@ import { memo, useEffect } from "react";
 import { Box, Group, Modal, Paper, Table, Text, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconClockPlus, IconClockUp } from "@tabler/icons-react";
+import { Descriptor } from "database";
 
 import { LoadingBox } from "@/components/LoadingBox";
 import { dateFormat } from "@/utils/dateFormat";
@@ -37,13 +38,17 @@ function BaseDescriptorItem({ descriptor }: Props) {
   let rows: JSX.Element[] = [];
 
   if (data) {
-    rows = data.yValues.map((element) => {
+    rows = data.results.map((element) => {
       const elements = element.split("\t");
 
       return (
         <Table.Tr key={element}>
           {elements.map((el) => (
-            <Table.Td key={element + el}>{el}</Table.Td>
+            <Table.Td key={element + el}>
+              {Intl.NumberFormat("en-US", {
+                maximumFractionDigits: 3,
+              }).format(Number(el))}
+            </Table.Td>
           ))}
         </Table.Tr>
       );
@@ -66,15 +71,9 @@ function BaseDescriptorItem({ descriptor }: Props) {
           blur: 3,
         }}
         size="xl"
-        title={`pEC50 on ${descriptor.sdfName.split("/")[1]}`}
+        title={`pEC50 and EC50 on ${descriptor.sdfName.split("/")[1]}`}
       >
         <Group gap="sm">
-          <Group gap="xs" title="Submitted At">
-            <IconClockPlus /> {dateFormat(descriptor.createdAt)}
-          </Group>
-          <Group gap="xs" title="Last Updated At">
-            <IconClockUp /> {dateFormat(descriptor.updatedAt)}
-          </Group>
           {isRefetching && (
             <Box mah={10} maw={40}>
               <LoadingBox />
@@ -86,11 +85,12 @@ function BaseDescriptorItem({ descriptor }: Props) {
           <Table>
             <Table.Thead>
               <Table.Tr>
-                <Table.Th ta="center">Number</Table.Th>
+                <Table.Th ta="center">Molecule</Table.Th>
                 <Table.Th colSpan={3} ta="center">
                   Calculated Descriptors
                 </Table.Th>
                 <Table.Th ta="center">pEC50</Table.Th>
+                <Table.Th ta="center">EC50</Table.Th>
               </Table.Tr>
               <Table.Tr>
                 <Table.Th />

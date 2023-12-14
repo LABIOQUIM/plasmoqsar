@@ -15,16 +15,16 @@ export function Footer() {
 
   return (
     <div className={classes.makers}>
-      <Image alt="" className={classes.makerImage128px} src={labioquimLogo} />
-      <Image alt="" className={classes.makerImage96px} src={fiocruzROLogo} />
+      <Image alt="" className={classes.makerImage} src={labioquimLogo} />
+      <Image alt="" className={classes.makerImage} src={fiocruzROLogo} />
       <Image
         alt=""
-        className={classes.makerImage96px}
+        className={classes.makerImage}
         src={isDark ? EpiAmOWhiteLogo : EpiAmOBlackLogo}
       />
       <Image
         alt=""
-        className={classes.makerImage128px}
+        className={classes.makerImage}
         src={isDark ? UFSBDarkLogo : UFSBWhiteLogo}
       />
     </div>

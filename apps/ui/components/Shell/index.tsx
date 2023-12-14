@@ -40,10 +40,6 @@ export function Shell({ session, children }: PropsWithChildren<Props>) {
   return (
     <QueryClientProvider client={queryClient}>
       <AppShell
-        footer={{
-          height: 152,
-          offset: false,
-        }}
         header={{ height: 60 }}
         navbar={{
           width: 300,
@@ -82,11 +78,17 @@ export function Shell({ session, children }: PropsWithChildren<Props>) {
             },
           }}
         >
-          {children}
+          <Box
+            style={{
+              flex: 1,
+            }}
+          >
+            {children}
+          </Box>
+          <AppShell.Footer className={classes.footer}>
+            <Footer />
+          </AppShell.Footer>
         </AppShell.Main>
-        <AppShell.Footer className={classes.footer}>
-          <Footer />
-        </AppShell.Footer>
       </AppShell>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

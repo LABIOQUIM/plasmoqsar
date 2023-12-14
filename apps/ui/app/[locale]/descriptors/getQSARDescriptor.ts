@@ -1,4 +1,6 @@
 "use server";
+import { Descriptor } from "database";
+
 import { api } from "@/lib/api";
 
 export async function getQSARDescriptor(id: string) {

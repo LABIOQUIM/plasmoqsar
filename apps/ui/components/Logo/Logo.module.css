@@ -1,0 +1,13 @@
+.container {
+  color: unset;
+  display: flex;
+  gap: var(--mantine-spacing-md);
+  ms-touch-select: none;
+  ms-user-select: none;
+  text-decoration: none;
+  user-select: none;
+}
+
+.title {
+  font-size: var(--mantine-font-size-lg);
+}

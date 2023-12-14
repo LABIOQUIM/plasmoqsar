@@ -39,13 +39,24 @@ export default function LoginForm() {
           color: "red",
           message: "Username or Password incorrect",
         });
+      } else if (res === "awaiting-activation") {
+        notifications.show({
+          color: "orange",
+          message:
+            "This user is awaiting activation. Check your email inbox and spam.",
+        });
+      } else if (res === "inactive") {
+        notifications.show({
+          color: "red",
+          message: "This user has been disabled.",
+        });
       } else if (res === "unknown-error") {
         notifications.show({
           color: "red",
           message: "Something went wrong. Please report to the administrators.",
         });
       } else {
-        router.replace("/descriptors");
+        router.push("/descriptors");
       }
     });
   }

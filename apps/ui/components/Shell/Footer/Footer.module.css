@@ -8,15 +8,9 @@
   @mixin larger-than $mantine-breakpoint-lg {
     flex-direction: row;
   }
-
 }
 
-.makerImage128px {
-  height: 128px;
-  width: auto;
-}
-
-.makerImage96px {
-  height: 96px;
+.makerImage {
+  height: 64px;
   width: auto;
 }

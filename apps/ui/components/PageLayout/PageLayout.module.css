@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  padding-bottom: var(--mantine-spacing-md);
   gap: var(--mantine-spacing-md);
   height: 100%;
   width: 100%;
