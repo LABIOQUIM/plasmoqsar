@@ -19,7 +19,7 @@ export function Footer() {
       <Image alt="" className={classes.makerImage} src={fiocruzROLogo} />
       <Image
         alt=""
-        className={classes.makerImage}
+        className={classes.makerImageEpi}
         src={isDark ? EpiAmOWhiteLogo : EpiAmOBlackLogo}
       />
       <Image

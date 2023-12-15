@@ -19,7 +19,7 @@ interface MainLink {
 }
 
 const links: MainLink[] = [
-  { icon: IconCell, label: "Descriptors", href: "/descriptors" },
+  { icon: IconCell, label: "My Molecules", href: "/my-molecules" },
 ];
 
 interface Props {

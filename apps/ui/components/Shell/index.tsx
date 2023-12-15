@@ -80,6 +80,8 @@ export function Shell({ session, children }: PropsWithChildren<Props>) {
         >
           <Box
             style={{
+              display: "flex",
+              flexDirection: "column",
               flex: 1,
             }}
           >
