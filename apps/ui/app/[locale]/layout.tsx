@@ -3,6 +3,7 @@ import { MantineProvider } from "@mantine/core";
 import { DatesProvider } from "@mantine/dates";
 import { Notifications } from "@mantine/notifications";
 import { Metadata } from "next";
+import Script from "next/script";
 
 import { Shell } from "@/components/Shell";
 import { getSession } from "@/hooks/getSession";
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | PlasmoQSAR",
   },
   description:
-    "Calculation of pEC50 and EC50% of anti-malaria agents - QSAR with machine learning",
+    "Calculation of pEC50 and IC50% (µM) of anti-malaria agents - QSAR with machine learning",
 };
 
 interface Props {
@@ -50,6 +51,24 @@ export default async function RootLayout({
             </DatesProvider>
           </MantineProvider>
         </I18nProviderClient>
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <Script
+              async
+              defer
+              src="https://www.googletagmanager.com/gtag/js?id=G-3NV0KZYD87"
+            />
+            <Script id="google_analytics" async defer>
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+              
+                gtag('config', 'G-3NV0KZYD87');
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
