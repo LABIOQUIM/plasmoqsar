@@ -5,7 +5,7 @@ import { Descriptor } from "database";
 import { getSession } from "@/hooks/getSession";
 import { api } from "@/lib/api";
 
-export async function getQSARDescriptors() {
+export async function getQSARMolecules() {
   const session = await getSession();
 
   if (!session) {

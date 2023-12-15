@@ -7,9 +7,9 @@ import { Descriptor } from "database";
 import { LoadingBox } from "@/components/LoadingBox";
 import { dateFormat } from "@/utils/dateFormat";
 
-import { useQSARDescriptorQuery } from "../useQSARDescriptor";
+import { useQSARMoleculeQuery } from "../useQSARMolecule";
 
-import classes from "./DescriptorItem.module.css";
+import classes from "./Molecule.module.css";
 
 interface Props {
   descriptor: Descriptor;
@@ -24,7 +24,7 @@ const StatusStyles = {
 
 function BaseDescriptorItem({ descriptor }: Props) {
   const [opened, { open, close }] = useDisclosure(false);
-  const { data, refetch, isLoading, isRefetching } = useQSARDescriptorQuery(
+  const { data, refetch, isLoading, isRefetching } = useQSARMoleculeQuery(
     descriptor.id
   );
 
@@ -71,7 +71,7 @@ function BaseDescriptorItem({ descriptor }: Props) {
           blur: 3,
         }}
         size="xl"
-        title={`pEC50 and EC50 on ${descriptor.sdfName.split("/")[1]}`}
+        title={`pEC50 and IC50% (µM) on ${descriptor.sdfName.split("/")[1]}`}
       >
         <Group gap="sm">
           {isRefetching && (
@@ -90,7 +90,7 @@ function BaseDescriptorItem({ descriptor }: Props) {
                   Calculated Descriptors
                 </Table.Th>
                 <Table.Th ta="center">pEC50</Table.Th>
-                <Table.Th ta="center">EC50</Table.Th>
+                <Table.Th ta="center">IC50% (&micro;M)</Table.Th>
               </Table.Tr>
               <Table.Tr>
                 <Table.Th />

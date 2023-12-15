@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { Loader, Text } from "@mantine/core";
 import dayjs from "dayjs";
 
-import { useQSARDescriptorsQuery } from "../useQSARDescriptors";
+import { useQSARMoleculesQuery } from "../useQSARMolecules";
 
 export default function TimeToRefetch() {
-  const { dataUpdatedAt, isRefetching } = useQSARDescriptorsQuery();
+  const { dataUpdatedAt, isRefetching } = useQSARMoleculesQuery();
   const [timeToRefetch, setTimeToRefetch] = useState(60);
 
   useEffect(() => {

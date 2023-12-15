@@ -8,20 +8,19 @@ import { PageLayout } from "@/components/PageLayout";
 import { getSession } from "@/hooks/getSession";
 import { queryClient } from "@/lib/queryClient";
 
-import { getQSARDescriptors } from "./getQSARDescriptors";
+import { getQSARMolecules } from "./getQSARMolecules";
 import TimeToRefetch from "./TimeToRefetch";
 
 const QSARFormModal = dynamic(() => import("./QSARFormModal"), {
   ssr: false,
 });
 
-const DescriptorsList = dynamic(() => import("./DescriptorsList"), {
+const MoleculeList = dynamic(() => import("./MoleculeList"), {
   ssr: false,
 });
 
 export const metadata: Metadata = {
-  title:
-    "Calculation of pEC50 and EC50% of anti-malaria agents - QSAR with machine learning",
+  title: "My Molecules",
 };
 
 export default async function Page() {
@@ -30,7 +29,7 @@ export default async function Page() {
 
   await queryClient.prefetchQuery({
     queryKey: ["user-descriptors"],
-    queryFn: () => getQSARDescriptors(),
+    queryFn: () => getQSARMolecules(),
   });
 
   return (
@@ -41,7 +40,7 @@ export default async function Page() {
           <QSARFormModal />
           <TimeToRefetch />
         </Group>
-        <DescriptorsList />
+        <MoleculeList />
       </PageLayout>
     </HydrationBoundary>
   );

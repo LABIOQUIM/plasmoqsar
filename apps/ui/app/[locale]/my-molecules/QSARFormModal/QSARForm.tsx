@@ -7,7 +7,7 @@ import { notifications } from "@mantine/notifications";
 import { IconFileDescription, IconUpload, IconX } from "@tabler/icons-react";
 
 import { sendQSARToQueue } from "../sendQSARToQueue";
-import { useQSARDescriptorsQuery } from "../useQSARDescriptors";
+import { useQSARMoleculesQuery } from "../useQSARMolecules";
 
 import classes from "./QSARForm.module.css";
 
@@ -22,7 +22,7 @@ interface Props {
 export default function QSARForm({ close }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const { onSubmit, setValues, values } = useForm<QSARFormInputs>();
-  const { refetch } = useQSARDescriptorsQuery();
+  const { refetch } = useQSARMoleculesQuery();
 
   function doSubmit({ file }: QSARFormInputs) {
     setIsLoading(true);
@@ -58,7 +58,7 @@ export default function QSARForm({ close }: Props) {
               .join(", ")}`,
           })
         }
-        maxSize={3 * 1024 ** 2}
+        maxSize={8 * 1024}
         accept={{
           "chemical/x-mdl-sdfile": [".sdf", ".SDF"],
         }}
@@ -116,7 +116,7 @@ export default function QSARForm({ close }: Props) {
         )}
       </Dropzone>
 
-      <Button loading={isLoading} type="submit">
+      <Button loading={isLoading} disabled={!values.file} type="submit">
         Submit
       </Button>
     </Box>

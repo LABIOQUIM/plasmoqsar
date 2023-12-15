@@ -2,7 +2,7 @@
 import { Button, Group, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { useQSARDescriptorsQuery } from "../useQSARDescriptors";
+import { useQSARMoleculesQuery } from "../useQSARMolecules";
 
 import QSARForm from "./QSARForm";
 
@@ -10,7 +10,7 @@ import classes from "./QSARFormModal.module.css";
 
 export default function QSARFormModal() {
   const [opened, { open, close }] = useDisclosure(false);
-  const { data } = useQSARDescriptorsQuery();
+  const { data } = useQSARMoleculesQuery();
 
   let isDisabled = false;
 
@@ -36,7 +36,7 @@ export default function QSARFormModal() {
           backgroundOpacity: 0.55,
           blur: 3,
         }}
-        title="Calculate pEC50"
+        title="Calculate pEC50 and IC50% (µM)"
       >
         <QSARForm close={close} />
       </Modal>
