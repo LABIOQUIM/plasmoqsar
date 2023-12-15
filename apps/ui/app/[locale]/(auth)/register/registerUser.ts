@@ -37,6 +37,7 @@ export async function registerUser(data: RegisterFormInputs) {
       template: "activation.hbs",
       context: {
         name: data.firstName,
+        username: data.username,
         activationURL: `${process.env.APP_URL}/activate/${userActivation.id}`,
       },
     });
