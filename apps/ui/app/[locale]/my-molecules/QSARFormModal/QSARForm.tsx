@@ -58,7 +58,7 @@ export default function QSARForm({ close }: Props) {
               .join(", ")}`,
           })
         }
-        maxSize={8 * 1024}
+        maxSize={8 * 1024 ** 2}
         accept={{
           "chemical/x-mdl-sdfile": [".sdf", ".SDF"],
         }}
