@@ -1,6 +1,6 @@
 {
   "name": "database",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "packageManager": "yarn@3.6.4",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

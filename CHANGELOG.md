@@ -1,5 +1,12 @@
 
 
+## 0.0.7 (2023-12-18)
+
+
+### Bug Fixes
+
+* wrong path redirects ([30d17af](https://github.com/LABIOQUIM/plasmoqsar/commit/30d17af9bf321c80a9f0a66b749ad3c0e4fd3200))
+
 ## 0.0.6 (2023-12-18)
 
 ## 0.0.5 (2023-12-18)
