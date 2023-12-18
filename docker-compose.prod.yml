@@ -44,6 +44,18 @@ services:
     volumes:
       - database:/var/lib/postgresql/data
 
+  redismailer:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - redis:/data
+
+  mailer:
+    image: murilofuza/simple-mail:0.0.6
+    env_file: .env
+    volumes:
+      - ./emails:/templates
+
   redis:
     image: redis:alpine
     restart: always
@@ -92,3 +104,6 @@ volumes:
     driver: nfsvol
   redis:
     driver: nfsvol
+  redismailer:
+    driver: nfsvol
+    
