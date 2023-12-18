@@ -11,7 +11,7 @@ const RegisterForm = dynamic(() => import("./RegisterForm"), {
 
 export default async function Page() {
   const session = await getSession();
-  if (session) redirect("/descriptors");
+  if (session) redirect("/my-molecules");
 
   return (
     <PageLayout>

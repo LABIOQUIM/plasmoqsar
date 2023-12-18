@@ -56,7 +56,7 @@ export default function LoginForm() {
           message: "Something went wrong. Please report to the administrators.",
         });
       } else {
-        router.push("/descriptors");
+        router.push("/my-molecules");
       }
     });
   }

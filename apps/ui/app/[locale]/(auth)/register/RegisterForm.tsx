@@ -58,7 +58,7 @@ export default function RegisterForm() {
             color: "green",
             message: "Your account has been created.",
           });
-          router.push("/descriptors");
+          router.push("/my-molecules");
         }
       })
       .finally(() => {
