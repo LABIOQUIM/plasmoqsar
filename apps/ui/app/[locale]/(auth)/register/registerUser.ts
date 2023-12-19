@@ -33,7 +33,7 @@ export async function registerUser(data: RegisterFormInputs) {
     await axios.post("http://mailer:3000/send-email", {
       from: `PlasmoQSAR <${process.env.SMTP_USER}>`,
       to: data.email,
-      subject: "Your registration at PlasmoQSAR",
+      subject: "[PlasmoQSAR] Your registration at PlasmoQSAR",
       template: "activation.hbs",
       context: {
         name: data.firstName,
