@@ -17,12 +17,7 @@ export function SignInButton({ session, ...props }: Props): ReactElement {
       // <Link href="/account" className={classes.container}>
       <UnstyledButton className={classes.user} {...props}>
         <Group>
-          <Avatar radius="xl">
-            {userFullName
-              .trim()
-              .split(" ")
-              .map((w) => w[0].toUpperCase())}
-          </Avatar>
+          <Avatar radius="xl" />
 
           <div style={{ flex: 1 }}>
             <Text size="sm" fw={500}>
