@@ -1,5 +1,12 @@
 
 
+## 0.0.9 (2023-12-19)
+
+
+### Bug Fixes
+
+* remove user name initial from avatar circle ([d686329](https://github.com/LABIOQUIM/plasmoqsar/commit/d686329d1b3a2d00ba396e42853294fc2e7109b2))
+
 ## 0.0.8 (2023-12-19)
 
 ## 0.0.7 (2023-12-18)
