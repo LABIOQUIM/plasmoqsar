@@ -1,5 +1,12 @@
 
 
+## 0.1.0 (2023-12-20)
+
+
+### Features
+
+* added csv download, about page ([1bf73f1](https://github.com/LABIOQUIM/plasmoqsar/commit/1bf73f14e977bab82a04a29dae2bff3d9729d508))
+
 ## 0.0.9 (2023-12-19)
 
 
