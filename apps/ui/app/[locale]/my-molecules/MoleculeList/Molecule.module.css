@@ -1,4 +1,5 @@
 .container {
+  align-items: center;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -7,6 +8,37 @@
 
   &:hover {
     filter: light-dark(brightness(95%), brightness(125%));
+  }
+
+  @media (min-width: $mantine-breakpoint-md) {
+    flex-direction: row;
+  }
+}
+
+.innerContainer {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-xs);
+  padding: var(--mantine-spacing-sm);
+}
+
+.resultsButton {
+  width: 100%;
+
+  @media (min-width: $mantine-breakpoint-md) {
+    height: 64px;
+    margin: 0 auto;
+    width: 192px;
+  }
+}
+
+.resultsButtonLabel {
+  font-weight: semi-bold;
+  font-size: var(--mantine-font-size-sm);
+
+  @media (min-width: $mantine-breakpoint-md) {
+    font-size: var(--mantine-font-size-lg);
   }
 }
 

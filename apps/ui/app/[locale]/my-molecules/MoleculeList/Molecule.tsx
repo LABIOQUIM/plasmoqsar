@@ -1,5 +1,15 @@
 import { memo, useEffect } from "react";
-import { Box, Group, Modal, Paper, Table, Text, Title } from "@mantine/core";
+import { CSVLink } from "react-csv";
+import {
+  Box,
+  Button,
+  Group,
+  Modal,
+  Paper,
+  Table,
+  Text,
+  Title,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconClockPlus, IconClockUp } from "@tabler/icons-react";
 import { Descriptor } from "database";
@@ -36,10 +46,14 @@ function BaseDescriptorItem({ descriptor }: Props) {
   }, [opened]);
 
   let rows: JSX.Element[] = [];
+  const csvData: Array<Array<string>> = [
+    ["Molecule", "D143", "D312", "D470", "pEC50", "IC50% (µM)"],
+  ];
 
   if (data) {
     rows = data.results.map((element) => {
       const elements = element.split("\t");
+      csvData.push(elements);
 
       return (
         <Table.Tr key={element}>
@@ -82,26 +96,36 @@ function BaseDescriptorItem({ descriptor }: Props) {
         </Group>
 
         {data ? (
-          <Table>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th ta="center">Molecule</Table.Th>
-                <Table.Th colSpan={3} ta="center">
-                  Calculated Descriptors
-                </Table.Th>
-                <Table.Th ta="center">pEC50</Table.Th>
-                <Table.Th ta="center">IC50% (&micro;M)</Table.Th>
-              </Table.Tr>
-              <Table.Tr>
-                <Table.Th />
-                <Table.Th ta="center">D143</Table.Th>
-                <Table.Th ta="center">D312</Table.Th>
-                <Table.Th ta="center">D470</Table.Th>
-                <Table.Th />
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody ta="center">{rows}</Table.Tbody>
-          </Table>
+          <>
+            <CSVLink
+              data={csvData}
+              filename={`EC50-and-IC50-on-${
+                descriptor.sdfName.split("/")[1].split(".")[0]
+              }.csv`}
+            >
+              <Button>Download CSV</Button>
+            </CSVLink>
+            <Table>
+              <Table.Thead>
+                <Table.Tr>
+                  <Table.Th ta="center">Molecule</Table.Th>
+                  <Table.Th colSpan={3} ta="center">
+                    Calculated Descriptors
+                  </Table.Th>
+                  <Table.Th ta="center">pEC50</Table.Th>
+                  <Table.Th ta="center">IC50% (&micro;M)</Table.Th>
+                </Table.Tr>
+                <Table.Tr>
+                  <Table.Th />
+                  <Table.Th ta="center">D143</Table.Th>
+                  <Table.Th ta="center">D312</Table.Th>
+                  <Table.Th ta="center">D470</Table.Th>
+                  <Table.Th />
+                </Table.Tr>
+              </Table.Thead>
+              <Table.Tbody ta="center">{rows}</Table.Tbody>
+            </Table>
+          </>
         ) : isLoading ? (
           <LoadingBox />
         ) : (
@@ -114,24 +138,33 @@ function BaseDescriptorItem({ descriptor }: Props) {
 
       <Paper
         className={`${classes.container} ${StatusStyles[descriptor.status]}`}
-        component="button"
         onClick={open}
         withBorder
       >
-        <Title order={3}>{descriptor.sdfName.split("/")[1]}</Title>
-        <Group>
-          {descriptor.status === "ERRORED" && (
-            <Text className={classes.errorText}>{descriptor.error}</Text>
-          )}
-        </Group>
-        <Group gap="sm">
-          <Group gap="xs" title="Submitted At">
-            <IconClockPlus /> {dateFormat(descriptor.createdAt)}
+        <Box className={classes.innerContainer}>
+          <Title order={3}>{descriptor.sdfName.split("/")[1]}</Title>
+          <Group>
+            {descriptor.status === "ERRORED" && (
+              <Text className={classes.errorText}>{descriptor.error}</Text>
+            )}
           </Group>
-          <Group gap="xs" title="Last Updated At">
-            <IconClockUp /> {dateFormat(descriptor.updatedAt)}
+          <Group gap="sm">
+            <Group gap="xs" title="Submitted At">
+              <IconClockPlus /> {dateFormat(descriptor.createdAt)}
+            </Group>
+            <Group gap="xs" title="Last Updated At">
+              <IconClockUp /> {dateFormat(descriptor.updatedAt)}
+            </Group>
           </Group>
-        </Group>
+        </Box>
+        <Button
+          classNames={{
+            root: classes.resultsButton,
+            label: classes.resultsButtonLabel,
+          }}
+        >
+          Show results
+        </Button>
       </Paper>
     </>
   );

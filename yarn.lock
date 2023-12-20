@@ -2227,6 +2227,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-csv@npm:^1.1.10":
+  version: 1.1.10
+  resolution: "@types/react-csv@npm:1.1.10"
+  dependencies:
+    "@types/react": "*"
+  checksum: 0a19efd0bb559a288ce640abc491850c81e75ca5900c25044d93ad633d89d62e49c6963a1d5657e664e61edd526295a4a93641dd8429703cc4ebf9a0ab4d4157
+  languageName: node
+  linkType: hard
+
 "@types/react-dom@npm:^18":
   version: 18.2.15
   resolution: "@types/react-dom@npm:18.2.15"
@@ -4687,6 +4696,24 @@ __metadata:
   version: 2.2.1
   resolution: "env-paths@npm:2.2.1"
   checksum: 65b5df55a8bab92229ab2b40dad3b387fad24613263d103a97f91c9fe43ceb21965cd3392b1ccb5d77088021e525c4e0481adb309625d0cb94ade1d1fb8dc17e
+  languageName: node
+  linkType: hard
+
+"equation-parser@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "equation-parser@npm:1.0.0"
+  bin:
+    equation-parser: bin/cli.js
+  checksum: 8afae5a5ca8ef3652130086854ca256b0b50b9fb476b20829e90c6ddef4d69e064fed1cd1fa0d52a130b39183fe1f1ae7137d3237cb9293a6582ec9a188aa0b8
+  languageName: node
+  linkType: hard
+
+"equation-resolver@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "equation-resolver@npm:1.0.0"
+  dependencies:
+    equation-parser: ^1.0.0
+  checksum: faa3e09ba156d10c427c98a8d51d827a939717b5f062891efaf8223c6f8c99273f72bb4b60693e34047e7979bf69538fe56c2cc7d8dfb6c5dc3a48428fabeba9
   languageName: node
   linkType: hard
 
@@ -9743,6 +9770,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-csv@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "react-csv@npm:2.2.2"
+  checksum: a6ffabd67fc9ba1478b003977923cfa3ccdd9553ac5edcc3824b4a5ea849b87cb2acfcc0781b0cd0a259bf56e6a7dfd35cfc307576aa51819fc5a32b03118fab
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:^18":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
@@ -9763,6 +9797,18 @@ __metadata:
   peerDependencies:
     react: ">= 16.8 || 18.0.0"
   checksum: 62402c213c4e151802208e31653828664674dec0b7464180e8c296128f455c42d4c9792b1e11adee7e5e311d38edc278315959a3e8f2bb727cef2591291191b8
+  languageName: node
+  linkType: hard
+
+"react-equation@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "react-equation@npm:1.0.0"
+  dependencies:
+    equation-parser: ^1.0.0
+    equation-resolver: ^1.0.0
+  peerDependencies:
+    react: ~16.8.0
+  checksum: f387fd7d441a7c4ee64fc3c6c812090067b2a404d44ee20478067b4da83a6a5adbe727e54d6ee6fa67f7af2241f058a8819982552f83cbb62357ef57df49434a
   languageName: node
   linkType: hard
 
@@ -11797,10 +11843,12 @@ __metadata:
     "@tanstack/react-query-devtools": ^5.8.4
     "@types/node": ^20
     "@types/react": ^18
+    "@types/react-csv": ^1.1.10
     "@types/react-dom": ^18
     axios: ^1.6.2
     database: "workspace:*"
     dayjs: ^1.11.10
+    equation-resolver: ^1.0.0
     lucia: ^2.7.4
     next: 14.0.0
     next-international: ^1.1.4
@@ -11809,7 +11857,9 @@ __metadata:
     postcss-preset-mantine: ^1.11.0
     postcss-simple-vars: ^7.0.1
     react: ^18
+    react-csv: ^2.2.2
     react-dom: ^18
+    react-equation: ^1.0.0
     sharp: ^0.32.6
     typescript: ^5
   languageName: unknown

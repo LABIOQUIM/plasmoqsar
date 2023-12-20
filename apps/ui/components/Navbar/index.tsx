@@ -1,7 +1,12 @@
 "use client";
 import { ReactElement } from "react";
 import { Badge, Group, Text, UnstyledButton } from "@mantine/core";
-import { Icon, IconCell, IconLogout } from "@tabler/icons-react";
+import {
+  Icon,
+  IconCell,
+  IconInfoCircle,
+  IconLogout,
+} from "@tabler/icons-react";
 import Link from "next/link";
 
 import { SignInButton } from "@/components/SignInButton";
@@ -19,6 +24,7 @@ interface MainLink {
 }
 
 const links: MainLink[] = [
+  { icon: IconInfoCircle, label: "About", href: "/" },
   { icon: IconCell, label: "My Molecules", href: "/my-molecules" },
 ];
 

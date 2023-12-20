@@ -36,7 +36,7 @@ export default async function Page() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <PageLayout>
         <Group gap="lg">
-          <Title>My Molecules</Title>
+          <Title order={3}>My Molecules</Title>
           <QSARFormModal />
           <TimeToRefetch />
         </Group>
