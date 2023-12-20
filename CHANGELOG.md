@@ -1,5 +1,12 @@
 
 
+## 0.1.1 (2023-12-20)
+
+
+### Bug Fixes
+
+* added 'pEC50 = ' to the start of the equation ([7bf8867](https://github.com/LABIOQUIM/plasmoqsar/commit/7bf88675e882fa3fa9c4a09295ade678c2c2e6f3))
+
 ## 0.1.0 (2023-12-20)
 
 
