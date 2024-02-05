@@ -1,7 +1,8 @@
 FROM node:20-buster-slim AS base
 
 # RUN apk add --no-cache procps
-RUN apt update && apt install procps openssl -y
+RUN apt update && apt install procps openssl -y \
+  && apt-get clean
 RUN corepack enable && corepack prepare yarn@3.6.4 --activate
 
 # Install dependencies only when needed
