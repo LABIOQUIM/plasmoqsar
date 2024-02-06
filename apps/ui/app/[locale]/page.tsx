@@ -16,14 +16,17 @@ export default async function Home() {
     {
       name: "Dr. Fernando B. Zanchi",
       photo: fernandoImg,
+      lattes: "http://lattes.cnpq.br/0564343474986429",
     },
     {
       name: "Railton Marques de Souza Guimarães",
       photo: railtonImg,
+      lattes: "http://lattes.cnpq.br/2959548571209633",
     },
     {
       name: "Ivo Henrique Provensi Vieira",
       photo: ivoImg,
+      lattes: "http://lattes.cnpq.br/5130583751808996",
     },
   ];
 
@@ -64,8 +67,10 @@ export default async function Home() {
       <Box className={mClasses.container}>
         {maintainers.map((maintainer) => (
           <Paper
+            component={Link}
             className={mClasses.paperContainer}
             key={maintainer.name}
+            href={maintainer.lattes}
             withBorder
           >
             <Avatar src={maintainer.photo.src} size="lg" />
@@ -75,6 +80,16 @@ export default async function Home() {
           </Paper>
         ))}
       </Box>
+
+      <Title mt="mt" order={4}>
+        Contact
+      </Title>
+      <Text>
+        If needed you can contact{" "}
+        <Link href="mailto:fernando.zanchi@fiocruz.br">
+          fernando.zanchi@fiocruz.br
+        </Link>
+      </Text>
     </PageLayout>
   );
 }
