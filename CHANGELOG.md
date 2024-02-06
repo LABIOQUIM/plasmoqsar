@@ -1,5 +1,7 @@
 
 
+## [0.1.3](https://github.com/LABIOQUIM/plasmoqsar/compare/0.1.2...0.1.3) (2024-02-06)
+
 ## [0.1.2](https://github.com/LABIOQUIM/plasmoqsar/compare/0.1.1...0.1.2) (2024-02-05)
 
 ## 0.1.1 (2023-12-20)
