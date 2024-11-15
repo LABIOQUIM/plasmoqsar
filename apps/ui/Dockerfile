@@ -3,7 +3,6 @@ LABEL authors="ivopr"
 
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
-RUN corepack enable && corepack prepare yarn@3.6.4 --activate
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -11,6 +10,7 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json .yarnrc.yml yarn.lock ./
+COPY .yarn/releases/yarn-4.0.1.cjs ./.yarn/releases/
 COPY apps/ui/package.json apps/ui/.yarnrc.yml ./apps/ui/
 COPY packages ./packages
 RUN yarn install
@@ -21,6 +21,7 @@ RUN yarn workspace database build
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY .yarn/releases/yarn-4.0.1.cjs ./.yarn/releases/
 COPY package.json .yarnrc.yml yarn.lock .env ./
 COPY apps/ui ./apps/ui
 COPY --from=deps /app/packages ./packages

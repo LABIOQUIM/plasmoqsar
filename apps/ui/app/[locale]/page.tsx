@@ -41,6 +41,13 @@ export default async function Home() {
         tested against Plasmodium falciparum. The descriptors are provided by
         the free software Mold2
       </Text>
+      
+      <List type="ordered">
+        <ListItem>
+        MARQUES DE SOUZA GUIMARÃES, RAILTON ; VIEIRA, IVO HENRIQUE PROVENSI ; ZANCHI, FABRÍCIO BERTON ; CACERES, RAFAEL ANDRADE ; ZANCHI, FERNANDO BERTON . Application of Machine Learning in the Development of Fourth Degree Quantitative Structure-Activity Relationship Model for Triclosan Analogs Tested against Plasmodium falciparum 3D7. ACS Omega. <Link href="https://doi.org/10.1021/acsomega.4c05768">https://doi.org/10.1021/acsomega.4c05768</Link>
+        </ListItem>
+      </List>
+
       <Title order={4}>Equation</Title>
       <List>
         <ListItem>A = Descriptor D143</ListItem>

@@ -1,4 +1,5 @@
-.yarn
+.yarn/cache
+.yarn/install-state.gz
 files
 node_modules
 report.txt

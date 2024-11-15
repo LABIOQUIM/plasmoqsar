@@ -3,7 +3,6 @@ FROM node:20-buster-slim AS base
 # RUN apk add --no-cache procps
 RUN apt update && apt install procps openssl -y \
   && apt-get clean
-RUN corepack enable && corepack prepare yarn@3.6.4 --activate
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -13,6 +12,7 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json .yarnrc.yml yarn.lock ./
+COPY .yarn/releases/yarn-4.0.1.cjs ./.yarn/releases/
 COPY apps/api/package.json apps/api/.yarnrc.yml ./apps/api/
 COPY packages ./packages
 RUN yarn install
@@ -24,6 +24,7 @@ RUN yarn install
 FROM base AS builder
 WORKDIR /app
 
+COPY .yarn/releases/yarn-4.0.1.cjs ./.yarn/releases/
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json .yarnrc.yml yarn.lock .env ./
 COPY apps/api ./apps/api
